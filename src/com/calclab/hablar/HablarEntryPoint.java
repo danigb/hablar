@@ -1,7 +1,9 @@
 package com.calclab.hablar;
 
+import com.calclab.hablar.chat.N.HablarChat;
 import com.calclab.hablar.core.client.HablarWidget;
 import com.calclab.hablar.login.client.N.HablarLogin;
+import com.calclab.hablar.openchat.client.HablarOpenChat;
 import com.calclab.hablar.roster.client.N.HablarRoster;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.ui.DialogBox;
@@ -15,12 +17,16 @@ public class HablarEntryPoint implements EntryPoint {
 	final HablarConfig config = HablarConfig.getFromMeta();
 	final HablarWidget widget = new HablarWidget(config.layout);
 
+	HablarChat.install(widget);
+
 	if (config.hasLogin) {
 	    HablarLogin.install(widget);
 	}
 
 	if (config.hasRoster) {
 	    HablarRoster.install(widget);
+	    HablarOpenChat.install(widget);
+	    // HablarEditBuddy.install(widget);
 	}
 
 	if (config.inline == null) {

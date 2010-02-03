@@ -48,4 +48,9 @@ public class AccordionContainer implements PagesContainer {
 	}
 	return hasWidget;
     }
+
+    @Override
+    public boolean remove(Page<?> page) {
+	return accordion.remove(page.getDisplay().asWidget());
+    }
 }

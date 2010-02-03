@@ -3,6 +3,7 @@ package com.calclab.hablar.core.client.page;
 import com.calclab.hablar.basic.client.HablarEventBus;
 import com.calclab.hablar.core.client.mvp.Display;
 import com.calclab.hablar.core.client.mvp.Presenter;
+import com.google.gwt.core.client.GWT;
 
 public class Page<T extends Display> implements Presenter<T> {
     public static enum XVis {
@@ -22,6 +23,29 @@ public class Page<T extends Display> implements Presenter<T> {
 	this.display = display;
 	this.id = PageID.create();
 	visibility = XVis.hidden;
+    }
+
+    public void addInfoChangedHandler(final PageInfoChangedHandler handler) {
+	eventBus.addHandler(PageInfoChangedEvent.TYPE, new PageInfoChangedHandler() {
+	    @Override
+	    public void onPageInfoChanged(PageInfoChangedEvent event) {
+		GWT.log("SAME: " + (event.getPage() == Page.this), null);
+		if (event.getPage() == Page.this) {
+		    handler.onPageInfoChanged(event);
+		}
+	    }
+	});
+    }
+
+    public void addVisibilityChangedHandler(final VisibilityChangedHandler handler) {
+	eventBus.addHandler(VisibilityChangedEvent.TYPE, new VisibilityChangedHandler() {
+	    @Override
+	    public void onVisibilityChanged(VisibilityChangedEvent event) {
+		if (event.getPage() == Page.this) {
+		    handler.onVisibilityChanged(event);
+		}
+	    }
+	});
     }
 
     @Override
@@ -51,28 +75,6 @@ public class Page<T extends Display> implements Presenter<T> {
 
     public XVis getVisibility() {
 	return visibility;
-    }
-
-    public void addInfoChangedHandler(final PageInfoChangedHandler handler) {
-	eventBus.addHandler(PageInfoChangedEvent.TYPE, new PageInfoChangedHandler() {
-	    @Override
-	    public void onPageInfoChanged(PageInfoChangedEvent event) {
-		if (event.getPage() == Page.this) {
-		    handler.onPageInfoChanged(event);
-		}
-	    }
-	});
-    }
-
-    public void addVisibilityChangedHandler(final VisibilityChangedHandler handler) {
-	eventBus.addHandler(VisibilityChangedEvent.TYPE, new VisibilityChangedHandler() {
-	    @Override
-	    public void onVisibilityChanged(VisibilityChangedEvent event) {
-		if (event.getPage() == Page.this) {
-		    handler.onVisibilityChanged(event);
-		}
-	    }
-	});
     }
 
     public void requestOpen() {

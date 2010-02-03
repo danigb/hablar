@@ -7,6 +7,7 @@ import com.calclab.hablar.core.client.page.PageInfoChangedHandler;
 import com.calclab.hablar.core.client.page.VisibilityChangedEvent;
 import com.calclab.hablar.core.client.page.VisibilityChangedHandler;
 import com.calclab.hablar.core.client.page.Page.XVis;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 
@@ -38,6 +39,7 @@ public class HeaderPresenter implements Presenter<HeaderDisplay> {
 	page.addInfoChangedHandler(new PageInfoChangedHandler() {
 	    @Override
 	    public void onPageInfoChanged(PageInfoChangedEvent event) {
+		GWT.log("INFO CHANGED: " + event.getPage().getPageTitle(), null);
 		display.setIconStyle(event.getPage().getPageIcon());
 	    }
 	});

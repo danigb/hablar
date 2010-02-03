@@ -35,7 +35,7 @@
             left: 0;
             top: 0;
             right: 0;
-            bottom: 0;
+            bottom: 3px;
             display: block;
             background-color: #BBBBBB;
             border-left: 1px solid #8C8C8C;

@@ -12,4 +12,6 @@ public interface PagesContainer {
     Widget getWidget();
 
     boolean open(Page<?> page);
+
+    boolean remove(Page<?> page);
 }

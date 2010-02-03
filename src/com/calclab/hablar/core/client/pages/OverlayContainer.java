@@ -1,13 +1,17 @@
 package com.calclab.hablar.core.client.pages;
 
+import static com.google.gwt.dom.client.Style.Unit.PCT;
 import static com.google.gwt.dom.client.Style.Unit.PX;
 
 import com.calclab.hablar.core.client.page.Page;
+import com.google.gwt.layout.client.Layout.AnimationCallback;
+import com.google.gwt.layout.client.Layout.Layer;
 import com.google.gwt.user.client.ui.LayoutPanel;
 import com.google.gwt.user.client.ui.Widget;
 
 public class OverlayContainer implements PagesContainer {
-    private static final String TYPE = "Overlay";
+    private static final String STYLE_OVERLAY = "hablar-Overlay";
+    public static final String TYPE = "Overlay";
     private final LayoutPanel panel;
     private Page<?> currentPage;
 
@@ -24,6 +28,15 @@ public class OverlayContainer implements PagesContainer {
     public boolean add(Page<?> page) {
 	assert currentPage == null : "Only one page in overlay";
 	this.currentPage = page;
+	Widget widget = currentPage.getDisplay().asWidget();
+	widget.addStyleName(STYLE_OVERLAY);
+	panel.add(widget);
+	panel.setWidgetLeftRight(widget, 0, PX, 0, PX);
+	panel.setWidgetTopHeight(widget, 0, PX, 0, PX);
+	panel.forceLayout();
+	panel.setVisible(true);
+	panel.setWidgetTopHeight(widget, 0, PX, 100, PCT);
+	panel.animate(500);
 	return true;
     }
 
@@ -39,6 +52,29 @@ public class OverlayContainer implements PagesContainer {
 
     @Override
     public boolean open(Page<?> page) {
+	return false;
+    }
+
+    @Override
+    public boolean remove(Page<?> page) {
+	if (currentPage == page) {
+	    final Widget widget = currentPage.getDisplay().asWidget();
+	    panel.setWidgetTopHeight(widget, 0, PX, 0, PX);
+	    panel.animate(250, new AnimationCallback() {
+		@Override
+		public void onAnimationComplete() {
+		    widget.removeStyleName(STYLE_OVERLAY);
+		    panel.remove(widget);
+		    currentPage = null;
+		    panel.setVisible(false);
+		}
+
+		@Override
+		public void onLayout(Layer layer, double progress) {
+		}
+	    });
+	    return true;
+	}
 	return false;
     }
 
