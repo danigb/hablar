@@ -1,103 +1,44 @@
 package com.calclab.hablar.core.client.page;
 
-import com.calclab.hablar.basic.client.HablarEventBus;
 import com.calclab.hablar.core.client.mvp.Display;
 import com.calclab.hablar.core.client.mvp.Presenter;
-import com.google.gwt.core.client.GWT;
+import com.calclab.hablar.core.client.page.PagePresenter.XVis;
 
-public class Page<T extends Display> implements Presenter<T> {
-    public static enum XVis {
-	open, closed, hidden
-    }
-    protected final T display;
-    protected final HablarEventBus eventBus;
-    private final String pageType;
-    private final PageID id;
+/**
+ * All page presenters must implements this interface
+ * 
+ */
+public interface Page<T extends Display> extends Presenter<T> {
 
-    private String pageTitle, userMessage, pageIcon;
-    private XVis visibility;
+    public void addInfoChangedHandler(final PageInfoChangedHandler handler);
 
-    public Page(String pageType, HablarEventBus eventBus, T display) {
-	this.pageType = pageType;
-	this.eventBus = eventBus;
-	this.display = display;
-	this.id = PageID.create();
-	visibility = XVis.hidden;
-    }
+    public void addVisibilityChangedHandler(final VisibilityChangedHandler handler);
 
-    public void addInfoChangedHandler(final PageInfoChangedHandler handler) {
-	eventBus.addHandler(PageInfoChangedEvent.TYPE, new PageInfoChangedHandler() {
-	    @Override
-	    public void onPageInfoChanged(PageInfoChangedEvent event) {
-		GWT.log("SAME: " + (event.getPage() == Page.this), null);
-		if (event.getPage() == Page.this) {
-		    handler.onPageInfoChanged(event);
-		}
-	    }
-	});
-    }
+    /**
+     * All pages have a unique PageID reference
+     */
+    public PageID getId();
 
-    public void addVisibilityChangedHandler(final VisibilityChangedHandler handler) {
-	eventBus.addHandler(VisibilityChangedEvent.TYPE, new VisibilityChangedHandler() {
-	    @Override
-	    public void onVisibilityChanged(VisibilityChangedEvent event) {
-		if (event.getPage() == Page.this) {
-		    handler.onVisibilityChanged(event);
-		}
-	    }
-	});
-    }
+    public String getPageIcon();
 
-    @Override
-    public T getDisplay() {
-	return display;
-    }
+    public String getPageTitle();
 
-    public PageID getId() {
-	return id;
-    }
+    public String getPageType();
 
-    public String getPageIcon() {
-	return pageIcon;
-    }
+    public String getUserMessage();
 
-    public String getPageTitle() {
-	return pageTitle;
-    }
+    public XVis getVisibility();
 
-    public String getPageType() {
-	return pageType;
-    }
+    public void requestHide();
 
-    public String getUserMessage() {
-	return userMessage;
-    }
+    public void requestOpen();
 
-    public XVis getVisibility() {
-	return visibility;
-    }
+    public void setPageIcon(String pageIcon);
 
-    public void requestOpen() {
-	eventBus.fireEvent(new OpenPageRequestEvent(this));
-    }
+    public void setPageTitle(String pageTitle);
 
-    public void setPageIcon(String pageIcon) {
-	this.pageIcon = pageIcon;
-	eventBus.fireEvent(new PageInfoChangedEvent(this));
-    }
+    public void setUserMessage(String userMessage);
 
-    public void setPageTitle(String pageTitle) {
-	this.pageTitle = pageTitle;
-	eventBus.fireEvent(new PageInfoChangedEvent(this));
-    }
-
-    public void setUserMessage(String userMessage) {
-	this.userMessage = userMessage;
-    }
-
-    public void setVisibility(XVis visibility) {
-	this.visibility = visibility;
-	eventBus.fireEvent(new VisibilityChangedEvent(this));
-    }
+    public void setVisibility(XVis visibility);
 
 }

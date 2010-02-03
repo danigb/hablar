@@ -3,12 +3,12 @@ package com.calclab.hablar.openchat.client.ui;
 import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 import com.calclab.emite.im.client.chat.ChatManager;
 import com.calclab.hablar.core.client.Hablar;
-import com.calclab.hablar.core.client.page.Page;
+import com.calclab.hablar.core.client.page.PagePresenter;
 import com.calclab.suco.client.Suco;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 
-public class OpenChatPresenter extends Page<OpenChatDisplay> {
+public class OpenChatPresenter extends PagePresenter<OpenChatDisplay> {
     private static final String TYPE = "OpenChat";
     private final ChatManager manager;
 

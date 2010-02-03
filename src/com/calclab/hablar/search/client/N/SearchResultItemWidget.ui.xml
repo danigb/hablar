@@ -1,0 +1,18 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+    <ui:style>
+        @sprite .userAdd {
+            gwt-image: 'buddy';
+        }
+    </ui:style>
+
+    <ui:image field="buddy" src="buddy-small.png"></ui:image>
+    
+    <g:HTMLPanel styleName="hablar-SearchResultItemWidget">
+        <span class="icon {style.userAdd}" ui:field="span"></span>
+        <g:Label ui:field="name" styleName="name">Result</g:Label>
+        <g:Label ui:field="jid" styleName="jid">JID</g:Label>
+        <g:Label ui:field="menu" styleName="menu"></g:Label>
+    </g:HTMLPanel>
+</ui:UiBinder> 

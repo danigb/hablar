@@ -2,9 +2,11 @@ package com.calclab.hablar.editbuddy.client;
 
 import com.calclab.emite.im.client.roster.Roster;
 import com.calclab.emite.im.client.roster.RosterItem;
-import com.calclab.hablar.basic.client.Hablar;
 import com.calclab.hablar.basic.client.i18n.Msg;
 import com.calclab.hablar.basic.client.ui.menu.MenuAction;
+import com.calclab.hablar.core.client.Hablar;
+import com.calclab.hablar.core.client.page.PagePresenter;
+import com.calclab.hablar.core.client.pages.OverlayContainer;
 import com.calclab.hablar.editbuddy.client.ui.EditBuddyDisplay;
 import com.calclab.suco.client.Suco;
 import com.google.gwt.event.dom.client.ChangeEvent;
@@ -15,19 +17,18 @@ import com.google.gwt.event.dom.client.ClickHandler;
 /**
  * Presenter in MVP pattern. Controls the EditBuddy form
  */
-public class EditBuddyPresenter {
+public class EditBuddyPresenter extends PagePresenter<EditBuddyDisplay> {
     private static final String DEBUGID_EDITBUDDY = "Action-EditBuddy";
     protected static final String[] EMPTY_ARRAY = new String[0];
     private final Hablar hablar;
     private final Msg i18n;
     private final MenuAction<RosterItem> action;
-    private final EditBuddyDisplay display;
     private final Roster roster;
     private RosterItem currentItem;
 
     public EditBuddyPresenter(Hablar hablar, EditBuddyDisplay display) {
+	super("EditButty", hablar.getEventBus(), display);
 	this.hablar = hablar;
-	this.display = display;
 	i18n = Suco.get(Msg.class);
 	roster = Suco.get(Roster.class);
 
@@ -66,7 +67,7 @@ public class EditBuddyPresenter {
     }
 
     private void cancelEdit() {
-	hablar.closeOverlay();
+	hablar.removePage(this);
     }
 
     private void onChangeNickName(RosterItem target) {
@@ -74,7 +75,7 @@ public class EditBuddyPresenter {
 	String nickName = target.getName();
 	display.getOldNickName().setText(nickName);
 	display.getNewNickName().setText(nickName);
-	hablar.showOverlay(display);
+	hablar.addPage(this, OverlayContainer.TYPE);
 	display.getFirstFocusable().setFocus(true);
     }
 
@@ -84,6 +85,6 @@ public class EditBuddyPresenter {
 	if (!currentItem.getName().equals(newName)) {
 	    roster.updateItem(currentItem.getJID(), newName, currentItem.getGroups().toArray(EMPTY_ARRAY));
 	}
-	hablar.closeOverlay();
+	hablar.removePage(this);
     }
 }

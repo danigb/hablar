@@ -5,10 +5,10 @@ import com.google.gwt.event.shared.GwtEvent;
 public class VisibilityChangedEvent extends GwtEvent<VisibilityChangedHandler> {
 
     public static final Type<VisibilityChangedHandler> TYPE = new Type<VisibilityChangedHandler>();
-    private final Page<?> page;
+    private final Page<?> pagePresenter;
 
     public VisibilityChangedEvent(Page<?> page) {
-	this.page = page;
+	this.pagePresenter = page;
     }
 
     @Override
@@ -16,8 +16,8 @@ public class VisibilityChangedEvent extends GwtEvent<VisibilityChangedHandler> {
 	return TYPE;
     }
 
-    public Page<?> getPage() {
-	return page;
+    public Page<?> getPagePresenter() {
+	return pagePresenter;
     }
 
     @Override

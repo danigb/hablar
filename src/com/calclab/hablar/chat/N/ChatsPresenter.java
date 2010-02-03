@@ -11,7 +11,7 @@ import com.calclab.emite.im.client.roster.Roster;
 import com.calclab.emite.im.client.roster.RosterItem;
 import com.calclab.hablar.chat.client.ChatConfig;
 import com.calclab.hablar.core.client.Hablar;
-import com.calclab.hablar.core.client.page.Page.XVis;
+import com.calclab.hablar.core.client.page.PagePresenter.XVis;
 import com.calclab.suco.client.Suco;
 import com.calclab.suco.client.events.Listener;
 

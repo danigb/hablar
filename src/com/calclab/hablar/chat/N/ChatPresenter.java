@@ -14,7 +14,7 @@ import com.calclab.hablar.basic.client.ui.icon.PresenceIcon;
 import com.calclab.hablar.basic.client.ui.icon.HablarIcons.IconType;
 import com.calclab.hablar.chat.client.ui.ChatMessageFormatter;
 import com.calclab.hablar.chat.client.ui.ChatPageView;
-import com.calclab.hablar.core.client.page.Page;
+import com.calclab.hablar.core.client.page.PagePresenter;
 import com.calclab.suco.client.Suco;
 import com.calclab.suco.client.events.Listener;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -22,7 +22,7 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyDownEvent;
 import com.google.gwt.event.dom.client.KeyDownHandler;
 
-public class ChatPresenter extends Page<ChatDisplay> {
+public class ChatPresenter extends PagePresenter<ChatDisplay> {
 
     public static final String TYPE = "Chat";
 

@@ -36,6 +36,11 @@ public class AccordionHeaderWidget extends Composite implements HeaderDisplay {
     }
 
     @Override
+    public HasClickHandlers getClose() {
+	return close;
+    }
+
+    @Override
     public HasText getHeaderTitle() {
 	return title;
     }

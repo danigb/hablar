@@ -5,10 +5,10 @@ import com.google.gwt.event.shared.GwtEvent;
 public class PageInfoChangedEvent extends GwtEvent<PageInfoChangedHandler> {
 
     public static final Type<PageInfoChangedHandler> TYPE = new Type<PageInfoChangedHandler>();
-    private final Page<?> page;
+    private final Page<?> pagePresenter;
 
     public PageInfoChangedEvent(Page<?> page) {
-	this.page = page;
+	this.pagePresenter = page;
     }
 
     @Override
@@ -16,8 +16,8 @@ public class PageInfoChangedEvent extends GwtEvent<PageInfoChangedHandler> {
 	return TYPE;
     }
 
-    public Page<?> getPage() {
-	return page;
+    public Page<?> getPagePresenter() {
+	return pagePresenter;
     }
 
     @Override

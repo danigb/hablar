@@ -4,6 +4,7 @@ import static com.google.gwt.dom.client.Style.Unit.PCT;
 import static com.google.gwt.dom.client.Style.Unit.PX;
 
 import com.calclab.hablar.core.client.page.Page;
+import com.calclab.hablar.core.client.page.PagePresenter;
 import com.google.gwt.layout.client.Layout.AnimationCallback;
 import com.google.gwt.layout.client.Layout.Layer;
 import com.google.gwt.user.client.ui.LayoutPanel;
@@ -13,7 +14,7 @@ public class OverlayContainer implements PagesContainer {
     private static final String STYLE_OVERLAY = "hablar-Overlay";
     public static final String TYPE = "Overlay";
     private final LayoutPanel panel;
-    private Page<?> currentPage;
+    private PagePresenter<?> currentPagePresenter;
 
     public OverlayContainer(LayoutPanel container) {
 	this.panel = new LayoutPanel();
@@ -25,10 +26,10 @@ public class OverlayContainer implements PagesContainer {
     }
 
     @Override
-    public boolean add(Page<?> page) {
-	assert currentPage == null : "Only one page in overlay";
-	this.currentPage = page;
-	Widget widget = currentPage.getDisplay().asWidget();
+    public boolean add(PagePresenter<?> page) {
+	assert currentPagePresenter == null : "Only one page in overlay";
+	this.currentPagePresenter = page;
+	Widget widget = currentPagePresenter.getDisplay().asWidget();
 	widget.addStyleName(STYLE_OVERLAY);
 	panel.add(widget);
 	panel.setWidgetLeftRight(widget, 0, PX, 0, PX);
@@ -57,15 +58,15 @@ public class OverlayContainer implements PagesContainer {
 
     @Override
     public boolean remove(Page<?> page) {
-	if (currentPage == page) {
-	    final Widget widget = currentPage.getDisplay().asWidget();
+	if (currentPagePresenter == page) {
+	    final Widget widget = currentPagePresenter.getDisplay().asWidget();
 	    panel.setWidgetTopHeight(widget, 0, PX, 0, PX);
 	    panel.animate(250, new AnimationCallback() {
 		@Override
 		public void onAnimationComplete() {
 		    widget.removeStyleName(STYLE_OVERLAY);
 		    panel.remove(widget);
-		    currentPage = null;
+		    currentPagePresenter = null;
 		    panel.setVisible(false);
 		}
 

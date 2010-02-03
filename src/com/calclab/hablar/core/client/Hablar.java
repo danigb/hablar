@@ -5,30 +5,40 @@ import java.util.List;
 
 import com.calclab.hablar.basic.client.HablarEventBus;
 import com.calclab.hablar.core.client.mvp.Presenter;
+import com.calclab.hablar.core.client.page.ClosePageRequestEvent;
+import com.calclab.hablar.core.client.page.ClosePageRequestHandler;
 import com.calclab.hablar.core.client.page.OpenPageRequestEvent;
 import com.calclab.hablar.core.client.page.OpenPageRequestHandler;
 import com.calclab.hablar.core.client.page.Page;
-import com.calclab.hablar.core.client.page.Page.XVis;
+import com.calclab.hablar.core.client.page.PagePresenter;
+import com.calclab.hablar.core.client.page.PagePresenter.XVis;
 import com.calclab.hablar.core.client.pages.PagesContainer;
 import com.google.gwt.core.client.GWT;
 
 public class Hablar implements Presenter<HablarDisplay> {
     private final HablarDisplay display;
     private final HablarEventBus eventBus;
-    private final ArrayList<Page<?>> pages;
+    private final ArrayList<PagePresenter<?>> pagePresenters;
     private final ArrayList<PagesContainer> containers;
-    private Page<?> currentPage;
+    private Page<?> currentPagePresenter;
 
     public Hablar(HablarEventBus eventBus, HablarDisplay display) {
 	this.eventBus = eventBus;
 	this.display = display;
-	this.pages = new ArrayList<Page<?>>();
+	this.pagePresenters = new ArrayList<PagePresenter<?>>();
 	this.containers = new ArrayList<PagesContainer>();
 
 	eventBus.addHandler(OpenPageRequestEvent.TYPE, new OpenPageRequestHandler() {
 	    @Override
 	    public void onOpenPageRequest(OpenPageRequestEvent event) {
-		openPage(event.getPage());
+		openPage(event.getPagePresenter());
+	    }
+	});
+
+	eventBus.addHandler(ClosePageRequestEvent.TYPE, new ClosePageRequestHandler() {
+	    @Override
+	    public void onClosePageRequest(ClosePageRequestEvent event) {
+		removePage(event.getPage());
 	    }
 	});
     }
@@ -38,8 +48,8 @@ public class Hablar implements Presenter<HablarDisplay> {
 	containers.add(0, container);
     }
 
-    public void addPage(Page<?> page) {
-	pages.add(page);
+    public void addPage(PagePresenter<?> page) {
+	pagePresenters.add(page);
 	for (PagesContainer container : containers) {
 	    if (container.add(page)) {
 		GWT.log("ADD " + page.getId(), null);
@@ -48,7 +58,7 @@ public class Hablar implements Presenter<HablarDisplay> {
 	}
     }
 
-    public void addPage(Page<?> page, String containerType) {
+    public void addPage(PagePresenter<?> page, String containerType) {
 	PagesContainer container = getContainer(containerType);
 	container.add(page);
     }
@@ -62,9 +72,9 @@ public class Hablar implements Presenter<HablarDisplay> {
 	return eventBus;
     }
 
-    public List<Page<?>> getPagesOfType(String type) {
-	ArrayList<Page<?>> list = new ArrayList<Page<?>>();
-	for (Page<?> page : pages) {
+    public List<PagePresenter<?>> getPagePresentersOfType(String type) {
+	ArrayList<PagePresenter<?>> list = new ArrayList<PagePresenter<?>>();
+	for (PagePresenter<?> page : pagePresenters) {
 	    if (type.equals(page.getPageType())) {
 		list.add(page);
 	    }
@@ -90,12 +100,12 @@ public class Hablar implements Presenter<HablarDisplay> {
 	return null;
     }
 
-    protected void openPage(Page<?> page) {
+    protected void openPage(PagePresenter<?> page) {
 	for (PagesContainer container : containers) {
 	    if (container.open(page)) {
-		if (currentPage != null)
-		    currentPage.setVisibility(XVis.closed);
-		currentPage = page;
+		if (currentPagePresenter != null)
+		    currentPagePresenter.setVisibility(XVis.closed);
+		currentPagePresenter = page;
 		page.setVisibility(XVis.open);
 		return;
 	    }

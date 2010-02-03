@@ -13,22 +13,25 @@ import com.calclab.hablar.basic.client.HablarEventBus;
 import com.calclab.hablar.basic.client.i18n.Msg;
 import com.calclab.hablar.basic.client.ui.icon.HablarIcons;
 import com.calclab.hablar.basic.client.ui.icon.HablarIcons.IconType;
-import com.calclab.hablar.core.client.page.Page;
+import com.calclab.hablar.basic.client.ui.menu.PopupMenu;
+import com.calclab.hablar.core.client.page.PagePresenter;
 import com.calclab.suco.client.Suco;
 import com.calclab.suco.client.events.Listener;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 
-public class RosterPresenter extends Page<RosterDisplay> {
+public class RosterPresenter extends PagePresenter<RosterDisplay> {
+    public static final String TYPE = "Roster";
     private boolean active;
     private final Msg i18n;
     private final Roster roster;
     private final HashMap<XmppURI, RosterItemPresenter> items;
     private final ChatManager manager;
+    private PopupMenu<RosterItem> itemMenu;
 
     public RosterPresenter(HablarEventBus eventBus, RosterDisplay display) {
-	super("Roster", eventBus, display);
+	super(TYPE, eventBus, display);
 	i18n = Suco.get(Msg.class);
 	manager = Suco.get(ChatManager.class);
 	roster = Suco.get(Roster.class);
@@ -44,6 +47,13 @@ public class RosterPresenter extends Page<RosterDisplay> {
 
     public void addAction(String iconStyle, String debugId, ClickHandler clickHandler) {
 	display.addAction(iconStyle, debugId, clickHandler);
+    }
+
+    public PopupMenu<RosterItem> getItemMenu() {
+	if (itemMenu == null) {
+	    itemMenu = new PopupMenu<RosterItem>("hablar-RosterPresenterMenu");
+	}
+	return itemMenu;
     }
 
     private void addRosterListeners() {

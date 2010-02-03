@@ -5,10 +5,10 @@ import com.google.gwt.event.shared.GwtEvent;
 public class OpenPageRequestEvent extends GwtEvent<OpenPageRequestHandler> {
 
     public static final Type<OpenPageRequestHandler> TYPE = new Type<OpenPageRequestHandler>();
-    private final Page<?> page;
+    private final PagePresenter<?> pagePresenter;
 
-    public OpenPageRequestEvent(Page<?> page) {
-	this.page = page;
+    public OpenPageRequestEvent(PagePresenter<?> page) {
+	this.pagePresenter = page;
     }
 
     @Override
@@ -16,8 +16,8 @@ public class OpenPageRequestEvent extends GwtEvent<OpenPageRequestHandler> {
 	return TYPE;
     }
 
-    public Page<?> getPage() {
-	return page;
+    public PagePresenter<?> getPagePresenter() {
+	return pagePresenter;
     }
 
     @Override

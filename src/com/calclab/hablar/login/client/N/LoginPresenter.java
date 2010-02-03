@@ -7,13 +7,13 @@ import com.calclab.hablar.basic.client.HablarEventBus;
 import com.calclab.hablar.basic.client.i18n.Msg;
 import com.calclab.hablar.basic.client.ui.icon.HablarIcons;
 import com.calclab.hablar.basic.client.ui.icon.HablarIcons.IconType;
-import com.calclab.hablar.core.client.page.Page;
+import com.calclab.hablar.core.client.page.PagePresenter;
 import com.calclab.suco.client.Suco;
 import com.calclab.suco.client.events.Listener;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 
-public class LoginPresenter extends Page<LoginDisplay> {
+public class LoginPresenter extends PagePresenter<LoginDisplay> {
     private final Session session;
     private final Msg i18n;
 

@@ -7,6 +7,7 @@ import com.calclab.hablar.basic.client.ui.icon.HablarIcons.IconType;
 import com.calclab.hablar.core.client.Hablar;
 import com.calclab.hablar.core.client.HablarWidget;
 import com.calclab.hablar.core.client.page.Page;
+import com.calclab.hablar.core.client.page.PagePresenter;
 import com.calclab.hablar.core.client.pages.OverlayContainer;
 import com.calclab.hablar.openchat.client.ui.OpenChatPresenter;
 import com.calclab.hablar.openchat.client.ui.OpenChatWidget;
@@ -23,7 +24,7 @@ public class HablarOpenChat implements EntryPoint {
 	final OpenChatPresenter openChat = new OpenChatPresenter(hablar, new OpenChatWidget());
 
 	String iconStyle = HablarIcons.get(IconType.chatAdd);
-	List<Page<?>> rosters = hablar.getPagesOfType(RosterView.TYPE);
+	List<PagePresenter<?>> rosters = hablar.getPagePresentersOfType(RosterView.TYPE);
 	for (Page<?> roster : rosters) {
 	    ((RosterPresenter) roster).addAction(iconStyle, "HablarOpenChat-openAction", new ClickHandler() {
 		@Override
