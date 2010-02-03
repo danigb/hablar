@@ -1,33 +1,52 @@
 package com.calclab.hablar;
 
-import com.calclab.hablar.core.client.HablarWidget;
-import com.calclab.hablar.login.client.N.HablarLogin;
-import com.calclab.hablar.roster.client.N.HablarRoster;
+import com.calclab.hablar.basic.client.ui.HablarWidget;
+import com.calclab.hablar.chat.client.HablarChat;
+import com.calclab.hablar.editbuddy.client.HablarEditBuddy;
+import com.calclab.hablar.login.client.HablarLogin;
+import com.calclab.hablar.openchat.client.HablarOpenChat;
+import com.calclab.hablar.roster.client.HablarRoster;
+import com.calclab.hablar.search.client.HablarSearch;
+import com.calclab.hablar.signals.client.HablarSignals;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.Widget;
 
-public class HablarEntryPoint implements EntryPoint {
+public class HablarEntryPointOld implements EntryPoint {
 
     @Override
     public void onModuleLoad() {
 	final HablarConfig config = HablarConfig.getFromMeta();
-	final HablarWidget widget = new HablarWidget(config.layout);
+	final HablarWidget hablar = new HablarWidget(config.layout);
+
+	HablarChat.install(hablar);
 
 	if (config.hasLogin) {
-	    HablarLogin.install(widget);
+	    HablarLogin.install(hablar);
 	}
 
 	if (config.hasRoster) {
-	    HablarRoster.install(widget);
+	    boolean isDocked = "left".equals(config.dockRoster);
+	    HablarRoster.install(hablar, isDocked);
+	    HablarOpenChat.install(hablar);
+	    HablarEditBuddy.install(hablar);
+	}
+
+	if (config.hasSearch) {
+	    HablarSearch.install(hablar);
+	}
+
+	if (config.hasSignals) {
+	    HablarSignals.install(hablar);
 	}
 
 	if (config.inline == null) {
-	    createDialog(widget, config);
+	    createDialog(hablar, config);
 	} else {
-	    addHablarToDiv(widget, config);
+	    addHablarToDiv(hablar, config);
 	}
+
     }
 
     private void addHablarToDiv(final HablarWidget hablar, final HablarConfig config) {
@@ -57,5 +76,4 @@ public class HablarEntryPoint implements EntryPoint {
 	    widget.setHeight(config.height);
 	}
     }
-
 }

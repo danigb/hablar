@@ -66,6 +66,7 @@ public class AccordionPanel extends Composite implements HasWidgets, RequiresRes
     public AccordionPanel() {
 	this.unit = Unit.PX;
 	initWidget(layoutPanel = new LayoutPanel());
+	layoutPanel.setStyleName("hablar-AccordionPanel");
     }
 
     public void add(Widget w) {
