@@ -6,9 +6,11 @@ public class VisibilityChangedEvent extends GwtEvent<VisibilityChangedHandler> {
 
     public static final Type<VisibilityChangedHandler> TYPE = new Type<VisibilityChangedHandler>();
     private final Page<?> pagePresenter;
+    private final PageState pageState;
 
-    public VisibilityChangedEvent(Page<?> page) {
+    public VisibilityChangedEvent(Page<?> page, PageState pageState) {
 	this.pagePresenter = page;
+	this.pageState = pageState;
     }
 
     @Override
@@ -18,6 +20,10 @@ public class VisibilityChangedEvent extends GwtEvent<VisibilityChangedHandler> {
 
     public Page<?> getPagePresenter() {
 	return pagePresenter;
+    }
+
+    public PageState getPageState() {
+	return pageState;
     }
 
     @Override

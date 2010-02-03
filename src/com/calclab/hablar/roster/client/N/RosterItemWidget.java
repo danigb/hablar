@@ -48,6 +48,11 @@ public class RosterItemWidget extends Composite implements RosterItemDisplay {
     }
 
     @Override
+    public HasClickHandlers getMenuAction() {
+	return menu;
+    }
+
+    @Override
     public HasText getName() {
 	return name;
     }

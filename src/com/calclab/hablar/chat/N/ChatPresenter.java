@@ -32,15 +32,15 @@ public class ChatPresenter extends PagePresenter<ChatDisplay> {
 	final XmppURI fromURI = chat.getURI();
 	final String name = getName(fromURI);
 
-	setPageTitle(name);
-	setPageIcon(HablarIcons.get(IconType.buddyOff));
+	getState().setPageTitle(name);
+	getState().setPageIcon(HablarIcons.get(IconType.buddyOff));
 	chat.onMessageReceived(new Listener<Message>() {
 	    @Override
 	    public void onEvent(final Message message) {
 		final String body = ChatMessageFormatter.format(message.getBody());
 		if (body != null) {
 		    display.showMessage(name, body, ChatPageView.MessageType.incoming);
-		    setPageTitle(i18n.newChatFrom(name, ChatMessageFormatter.ellipsis(body, 25)));
+		    getState().setPageTitle(i18n.newChatFrom(name, ChatMessageFormatter.ellipsis(body, 25)));
 		}
 	    }
 	});
@@ -72,7 +72,7 @@ public class ChatPresenter extends PagePresenter<ChatDisplay> {
     }
 
     public void setPresence(boolean available, Show show) {
-	setPageIcon(PresenceIcon.getIcon(available, show));
+	getState().setPageIcon(PresenceIcon.getIcon(available, show));
     }
 
     private String getName(final XmppURI fromURI) {

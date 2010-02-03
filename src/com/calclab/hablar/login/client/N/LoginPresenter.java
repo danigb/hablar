@@ -21,7 +21,7 @@ public class LoginPresenter extends PagePresenter<LoginDisplay> {
 	super("Login", eventBus, display);
 	this.session = Suco.get(Session.class);
 	this.i18n = Suco.get(Msg.class);
-	setPageIcon(HablarIcons.get(IconType.off));
+	getState().setPageIcon(HablarIcons.get(IconType.off));
 
 	display.getAction().addClickHandler(new ClickHandler() {
 	    @Override
@@ -64,9 +64,9 @@ public class LoginPresenter extends PagePresenter<LoginDisplay> {
 	}
 	display.getActionText().setText(actionText);
 	display.setActionEnabled(actionEnabled);
-	setPageTitle(pageTitle);
-	setPageIcon(pageIcon);
-	setUserMessage("Session state: " + state);
+	getState().setPageTitle(pageTitle);
+	getState().setPageIcon(pageIcon);
+	getState().setUserMessage("Session state: " + state);
     }
 
     protected void login() {

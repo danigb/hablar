@@ -10,35 +10,19 @@ import com.calclab.hablar.core.client.page.PagePresenter.XVis;
  */
 public interface Page<T extends Display> extends Presenter<T> {
 
-    public void addInfoChangedHandler(final PageInfoChangedHandler handler);
-
-    public void addVisibilityChangedHandler(final VisibilityChangedHandler handler);
-
     /**
      * All pages have a unique PageID reference
      */
     public PageID getId();
 
-    public String getPageIcon();
-
-    public String getPageTitle();
+    public PageState getState();
 
     public String getPageType();
-
-    public String getUserMessage();
-
-    public XVis getVisibility();
 
     public void requestHide();
 
     public void requestOpen();
 
-    public void setPageIcon(String pageIcon);
-
-    public void setPageTitle(String pageTitle);
-
-    public void setUserMessage(String userMessage);
-
-    public void setVisibility(XVis visibility);
+    public void setVisibility(XVis closed);
 
 }

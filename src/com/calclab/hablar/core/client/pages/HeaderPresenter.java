@@ -1,13 +1,12 @@
 package com.calclab.hablar.core.client.pages;
 
 import com.calclab.hablar.core.client.mvp.Presenter;
-import com.calclab.hablar.core.client.page.Page;
 import com.calclab.hablar.core.client.page.PageInfoChangedEvent;
 import com.calclab.hablar.core.client.page.PageInfoChangedHandler;
+import com.calclab.hablar.core.client.page.PageState;
 import com.calclab.hablar.core.client.page.VisibilityChangedEvent;
 import com.calclab.hablar.core.client.page.VisibilityChangedHandler;
 import com.calclab.hablar.core.client.page.PagePresenter.XVis;
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 
@@ -16,13 +15,13 @@ public class HeaderPresenter implements Presenter<HeaderDisplay> {
     private final HeaderDisplay display;
     private String currentStyle;
 
-    public HeaderPresenter(final Page<?> page, final HeaderDisplay display) {
+    public HeaderPresenter(final PageState state, final HeaderDisplay display) {
 	this.display = display;
 
 	display.getOpen().addClickHandler(new ClickHandler() {
 	    @Override
 	    public void onClick(ClickEvent event) {
-		page.requestOpen();
+		state.getPage().requestOpen();
 	    }
 	});
 
@@ -30,31 +29,30 @@ public class HeaderPresenter implements Presenter<HeaderDisplay> {
 	    @Override
 	    public void onClick(ClickEvent event) {
 		event.preventDefault();
-		page.requestHide();
+		state.getPage().requestHide();
 	    }
 	});
 
-	page.addVisibilityChangedHandler(new VisibilityChangedHandler() {
+	state.addVisibilityChangedHandler(new VisibilityChangedHandler() {
 	    @Override
 	    public void onVisibilityChanged(VisibilityChangedEvent event) {
-		XVis visibility = event.getPagePresenter().getVisibility();
+		XVis visibility = state.getVisibility();
 		visibilityChanged(visibility);
 	    }
 
 	});
-	visibilityChanged(page.getVisibility());
+	visibilityChanged(state.getVisibility());
 
-	page.addInfoChangedHandler(new PageInfoChangedHandler() {
+	state.addInfoChangedHandler(new PageInfoChangedHandler() {
 	    @Override
 	    public void onPageInfoChanged(PageInfoChangedEvent event) {
-		GWT.log("INFO CHANGED: " + event.getPagePresenter().getPageTitle(), null);
-		display.setIconStyle(event.getPagePresenter().getPageIcon());
+		display.setIconStyle(state.getPageIcon());
 	    }
 	});
 
-	display.setIconStyle(page.getPageIcon());
-	display.getHeaderTitle().setText(page.getPageTitle());
-
+	display.setIconStyle(state.getPageIcon());
+	display.getHeaderTitle().setText(state.getPageTitle());
+	display.setCloseIconVisible(state.isCloseable());
     }
 
     public HeaderDisplay getDisplay() {

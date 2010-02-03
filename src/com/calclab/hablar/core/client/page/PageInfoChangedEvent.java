@@ -6,9 +6,11 @@ public class PageInfoChangedEvent extends GwtEvent<PageInfoChangedHandler> {
 
     public static final Type<PageInfoChangedHandler> TYPE = new Type<PageInfoChangedHandler>();
     private final Page<?> pagePresenter;
+    private final PageState pageState;
 
-    public PageInfoChangedEvent(Page<?> page) {
+    public PageInfoChangedEvent(Page<?> page, PageState pageState) {
 	this.pagePresenter = page;
+	this.pageState = pageState;
     }
 
     @Override
@@ -18,6 +20,10 @@ public class PageInfoChangedEvent extends GwtEvent<PageInfoChangedHandler> {
 
     public Page<?> getPagePresenter() {
 	return pagePresenter;
+    }
+
+    public PageState getPageState() {
+	return pageState;
     }
 
     @Override

@@ -9,6 +9,7 @@ import com.calclab.hablar.core.client.HablarWidget;
 import com.calclab.hablar.core.client.page.Page;
 import com.calclab.hablar.core.client.page.PagePresenter;
 import com.calclab.hablar.roster.client.N.RosterPresenter;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 
@@ -17,16 +18,19 @@ public class HablarSearch {
     public static void install(HablarWidget widget) {
 	Hablar hablar = widget.getHablar();
 	final SearchPresenter search = new SearchPresenter(hablar.getEventBus(), new SearchWidget());
-	hablar.addPage(search);
+	List<PagePresenter<?>> rosters = hablar.getPagePresentersOfType(RosterPresenter.TYPE);
+	boolean visible = rosters.size() == 0;
+	if (visible)
+	    hablar.addPage(search);
 
 	String iconStyle = HablarIcons.get(IconType.search);
 	String debugId = "HablarLogic-searchAction";
 
-	List<PagePresenter<?>> rosters = hablar.getPagePresentersOfType(RosterPresenter.TYPE);
 	for (Page<?> roster : rosters) {
 	    ((RosterPresenter) roster).addAction(iconStyle, debugId, new ClickHandler() {
 		@Override
 		public void onClick(ClickEvent event) {
+		    GWT.log("Show search", null);
 		    search.requestOpen();
 		}
 	    });

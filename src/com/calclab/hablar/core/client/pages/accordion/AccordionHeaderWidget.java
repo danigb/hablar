@@ -56,6 +56,11 @@ public class AccordionHeaderWidget extends Composite implements HeaderDisplay {
     }
 
     @Override
+    public void setCloseIconVisible(boolean visible) {
+	close.setVisible(visible);
+    }
+
+    @Override
     public void setIconStyle(String iconStyle) {
 	if (currentIconStyle != null) {
 	    icon.removeStyleName(currentIconStyle);

@@ -18,6 +18,7 @@ import com.calclab.hablar.core.client.page.PagePresenter;
 import com.calclab.suco.client.Suco;
 import com.calclab.suco.client.events.Listener;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 
@@ -38,8 +39,8 @@ public class RosterPresenter extends PagePresenter<RosterDisplay> {
 	items = new HashMap<XmppURI, RosterItemPresenter>();
 	active = true;
 
-	setPageTitle(i18n.contacts());
-	setPageIcon(HablarIcons.get(IconType.roster));
+	getState().init(HablarIcons.get(IconType.roster), i18n.contacts());
+
 	addRosterListeners();
 	addSessionListeners();
 
@@ -73,7 +74,8 @@ public class RosterPresenter extends PagePresenter<RosterDisplay> {
 	    public void onEvent(final RosterItem item) {
 		getPresenter(item);
 		// FIXME: i18n
-		setUserMessage(item.getName() + " has been added to Contacts.");
+		String msg = item.getName() + " has been added to Contacts.";
+		getState().setUserMessage(msg);
 	    }
 	});
 
@@ -89,7 +91,8 @@ public class RosterPresenter extends PagePresenter<RosterDisplay> {
 	    public void onEvent(final RosterItem item) {
 		display.remove(getPresenter(item).getDisplay());
 		// FIXME: i18n
-		setUserMessage(item.getJID().getNode() + " has been removed from Contacts.");
+		String msg = item.getJID().getNode() + " has been removed from Contacts.";
+		getState().setUserMessage(msg);
 	    }
 	});
     }
@@ -116,6 +119,15 @@ public class RosterPresenter extends PagePresenter<RosterDisplay> {
 	    @Override
 	    public void onClick(ClickEvent event) {
 		manager.open(item.getJID());
+	    }
+	});
+	itemDisplay.getMenuAction().addClickHandler(new ClickHandler() {
+	    @Override
+	    public void onClick(ClickEvent event) {
+		event.preventDefault();
+		Element element = event.getRelativeElement();
+		int width = element.getClientWidth();
+		getItemMenu().show(element.getAbsoluteLeft() - width, element.getAbsoluteTop());
 	    }
 	});
 	return presenter;

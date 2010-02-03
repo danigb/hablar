@@ -4,15 +4,17 @@
 	<ui:style>
 		
 	</ui:style>
-	<g:FocusPanel ui:field="self">
-    <g:FlowPanel styleName="hablar-rosterItemWidget hablar-ListItem">
-        <g:FlowPanel styleName="item">
-            <g:Label styleName="icon" ui:field="icon"></g:Label>
-            <g:Label styleName="name" ui:field="name">name-here</g:Label>
-            <g:Label styleName="jid" ui:field="jid">jid</g:Label>
-            <g:Label ui:field="menu" styleName="menu"></g:Label>
-        </g:FlowPanel>
-        <g:Label styleName="status" ui:field="status" />
-    </g:FlowPanel>
-	</g:FocusPanel>
+	<g:FlowPanel styleName="hablar-rosterItemWidget hablar-ListItem">
+		<g:FlowPanel styleName="item">
+			<g:FocusPanel ui:field="self" styleName="user">
+				<g:FlowPanel>
+					<g:Label styleName="icon" ui:field="icon"></g:Label>
+					<g:Label styleName="name" ui:field="name">name-here</g:Label>
+					<g:Label styleName="jid" ui:field="jid">jid</g:Label>
+				</g:FlowPanel>
+			</g:FocusPanel>
+			<g:Label ui:field="menu" styleName="menu"></g:Label>
+		</g:FlowPanel>
+		<g:Label styleName="status" ui:field="status" />
+	</g:FlowPanel>
 </ui:UiBinder> 

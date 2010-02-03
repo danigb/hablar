@@ -94,7 +94,7 @@
 }
 
 /** ROSTER **/
-.user {
+.hablar-RosterWidget .item {
 	width: 100%;
 	overflow: hidden;
 }
@@ -117,6 +117,10 @@
 
 div.hablar-RosterItemWidget:hover {
 	background-color: #E9E9E9;
+}
+
+.hablar-RosterItemWidget .user {
+	float: left;
 }
 
 .hablar-RosterItemWidget .icon {

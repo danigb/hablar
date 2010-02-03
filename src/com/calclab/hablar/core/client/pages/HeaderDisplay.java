@@ -13,6 +13,8 @@ public interface HeaderDisplay extends Display {
 
     void removeStyle(String styleName);
 
+    void setCloseIconVisible(boolean visible);
+
     void setIconStyle(String iconStyle);
 
     void setStyle(String styleName);

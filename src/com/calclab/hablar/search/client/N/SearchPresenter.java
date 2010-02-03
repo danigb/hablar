@@ -18,7 +18,6 @@ import com.calclab.hablar.basic.client.ui.page.PageView.Visibility;
 import com.calclab.hablar.basic.client.ui.page.events.VisibilityChangedEvent;
 import com.calclab.hablar.basic.client.ui.page.events.VisibilityChangedHandler;
 import com.calclab.hablar.core.client.page.PagePresenter;
-import com.calclab.hablar.search.client.SearchResultItemView;
 import com.calclab.hablar.search.client.N.SearchDisplay.Level;
 import com.calclab.suco.client.Suco;
 import com.google.gwt.event.dom.client.ChangeEvent;
@@ -37,9 +36,9 @@ public class SearchPresenter extends PagePresenter<SearchDisplay> {
     private final Roster roster;
     private final Msg i18n;
 
-    private PopupMenuView<SearchResultItemView> addToRosterMenu;
+    private PopupMenuView<SearchResultItemPresenter> addToRosterMenu;
 
-    private PopupMenuView<SearchResultItemView> removeFromRosterMenu;
+    private PopupMenuView<SearchResultItemPresenter> removeFromRosterMenu;
 
     public SearchPresenter(HablarEventBus eventBus, SearchWidget display) {
 	super("HablarSearch", eventBus, display);
@@ -47,8 +46,7 @@ public class SearchPresenter extends PagePresenter<SearchDisplay> {
 	roster = Suco.get(Roster.class);
 	i18n = Suco.get(Msg.class);
 
-	setPageTitle(i18n.searchUsers());
-	setPageIcon(HablarIcons.get(HablarIcons.IconType.search));
+	getState().init(HablarIcons.get(HablarIcons.IconType.search), i18n.searchUsers());
 	createMenus();
 	bind();
     }
@@ -81,30 +79,31 @@ public class SearchPresenter extends PagePresenter<SearchDisplay> {
 
     private void createMenus() {
 	addToRosterMenu = display.createMenu(ADD_ROSTER_MENU_DEB_ID);
-	addToRosterMenu.addAction(new MenuAction<SearchResultItemView>(i18n.addToContacts(), ADD_ROSTERITEM_DEB_ID) {
+	addToRosterMenu
+		.addAction(new MenuAction<SearchResultItemPresenter>(i18n.addToContacts(), ADD_ROSTERITEM_DEB_ID) {
+		    @Override
+		    public void execute(final SearchResultItemPresenter target) {
+			onResultToRoster(target);
+		    }
+		});
+	addToRosterMenu.addAction(new MenuAction<SearchResultItemPresenter>(i18n.chat(), CHAT_DEB_ID) {
 	    @Override
-	    public void execute(final SearchResultItemView target) {
-		onResultToRoster(target);
-	    }
-	});
-	addToRosterMenu.addAction(new MenuAction<SearchResultItemView>(i18n.chat(), CHAT_DEB_ID) {
-	    @Override
-	    public void execute(final SearchResultItemView target) {
+	    public void execute(final SearchResultItemPresenter target) {
 		onChatWith(target);
 	    }
 	});
 
 	removeFromRosterMenu = display.createMenu(REMOVE_ROSTER_MENU_DEB_ID);
-	removeFromRosterMenu.addAction(new MenuAction<SearchResultItemView>("Remove from roster",
+	removeFromRosterMenu.addAction(new MenuAction<SearchResultItemPresenter>("Remove from roster",
 		REMOVE_ROSTERITEM_DEB_ID) {
 	    @Override
-	    public void execute(final SearchResultItemView target) {
+	    public void execute(final SearchResultItemPresenter target) {
 		onRemoveFromRoster(target);
 	    }
 	});
-	removeFromRosterMenu.addAction(new MenuAction<SearchResultItemView>("Chat", CHAT_DEB_ID) {
+	removeFromRosterMenu.addAction(new MenuAction<SearchResultItemPresenter>("Chat", CHAT_DEB_ID) {
 	    @Override
-	    public void execute(final SearchResultItemView target) {
+	    public void execute(final SearchResultItemPresenter target) {
 		onChatWith(target);
 	    }
 	});
@@ -139,15 +138,15 @@ public class SearchPresenter extends PagePresenter<SearchDisplay> {
 	}
     }
 
-    void onChatWith(final SearchResultItemView result) {
+    void onChatWith(final SearchResultItemPresenter result) {
 	Suco.get(ChatManager.class).open(result.getItem().getJid());
     }
 
-    void onRemoveFromRoster(final SearchResultItemView result) {
+    void onRemoveFromRoster(final SearchResultItemPresenter result) {
 	roster.removeItem(result.getItem().getJid());
     }
 
-    void onResultToRoster(final SearchResultItemView result) {
+    void onResultToRoster(final SearchResultItemPresenter result) {
 	final SearchResultItem item = result.getItem();
 	roster.requestAddItem(item.getJid(), item.getNick());
     }

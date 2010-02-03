@@ -25,7 +25,7 @@ public class AccordionContainer implements PagesContainer {
 
     @Override
     public boolean add(PagePresenter<?> page) {
-	HeaderPresenter header = new HeaderPresenter(page, new AccordionHeaderWidget());
+	HeaderPresenter header = new HeaderPresenter(page.getState(), new AccordionHeaderWidget());
 	accordion.add(page.getDisplay().asWidget(), header.getDisplay().asWidget(), SIZE_HEADER);
 	return true;
     }

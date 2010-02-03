@@ -10,6 +10,8 @@ public interface RosterItemDisplay extends Display {
 
     HasText getJid();
 
+    HasClickHandlers getMenuAction();
+
     HasText getName();
 
     HasText getStatus();
