@@ -11,8 +11,7 @@ import com.calclab.hablar.core.client.page.PagePresenter;
 import com.calclab.hablar.core.client.pages.OverlayContainer;
 import com.calclab.hablar.openchat.client.ui.OpenChatPresenter;
 import com.calclab.hablar.openchat.client.ui.OpenChatWidget;
-import com.calclab.hablar.roster.client.RosterView;
-import com.calclab.hablar.roster.client.N.RosterPresenter;
+import com.calclab.hablar.roster.client.RosterPresenter;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -24,7 +23,7 @@ public class HablarOpenChat implements EntryPoint {
 	final OpenChatPresenter openChat = new OpenChatPresenter(hablar, new OpenChatWidget());
 
 	String iconStyle = HablarIcons.get(IconType.chatAdd);
-	List<PagePresenter<?>> rosters = hablar.getPagePresentersOfType(RosterView.TYPE);
+	List<PagePresenter<?>> rosters = hablar.getPagePresentersOfType(RosterPresenter.TYPE);
 	for (Page<?> roster : rosters) {
 	    ((RosterPresenter) roster).addAction(iconStyle, "HablarOpenChat-openAction", new ClickHandler() {
 		@Override

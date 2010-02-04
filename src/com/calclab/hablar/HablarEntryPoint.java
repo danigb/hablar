@@ -5,7 +5,7 @@ import com.calclab.hablar.core.client.HablarWidget;
 import com.calclab.hablar.editbuddy.client.HablarEditBuddy;
 import com.calclab.hablar.login.client.HablarLogin;
 import com.calclab.hablar.openchat.client.HablarOpenChat;
-import com.calclab.hablar.roster.client.N.HablarRoster;
+import com.calclab.hablar.roster.client.HablarRoster;
 import com.calclab.hablar.search.client.HablarSearch;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.ui.DialogBox;

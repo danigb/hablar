@@ -1,4 +1,4 @@
-package com.calclab.hablar.roster.client.N;
+package com.calclab.hablar.roster.client;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Style.Unit;
@@ -30,6 +30,11 @@ public class RosterWidget extends Composite implements RosterDisplay {
 
     public RosterWidget() {
 	initWidget(uiBinder.createAndBindUi(this));
+	roster.ensureDebugId("RosterWidget-roster");
+	scroll.ensureDebugId("RosterWidget-scroll");
+	list.ensureDebugId("RosterWidget-list");
+	actions.ensureDebugId("RosterWidget-actions");
+	disabledLabel.ensureDebugId("RosterWidget-disabledPanel");
     }
 
     @Override

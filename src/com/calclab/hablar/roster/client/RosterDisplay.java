@@ -1,4 +1,4 @@
-package com.calclab.hablar.roster.client.N;
+package com.calclab.hablar.roster.client;
 
 import com.calclab.hablar.core.client.mvp.Display;
 import com.google.gwt.event.dom.client.ClickHandler;
