@@ -1,4 +1,4 @@
-package com.calclab.hablar.login.client.N;
+package com.calclab.hablar.login.client;
 
 import com.calclab.emite.core.client.xmpp.session.Session;
 import com.calclab.emite.core.client.xmpp.session.Session.State;
@@ -64,6 +64,7 @@ public class LoginPresenter extends PagePresenter<LoginDisplay> {
 	}
 	display.getActionText().setText(actionText);
 	display.setActionEnabled(actionEnabled);
+	display.addMessage("Session: " + state.toString());
 	getState().setPageTitle(pageTitle);
 	getState().setPageIcon(pageIcon);
 	getState().setUserMessage("Session state: " + state);

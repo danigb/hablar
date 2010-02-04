@@ -1,4 +1,4 @@
-package com.calclab.hablar.search.client.N;
+package com.calclab.hablar.search.client;
 
 import java.util.HashMap;
 import java.util.List;
@@ -18,7 +18,7 @@ import com.calclab.hablar.basic.client.ui.page.PageView.Visibility;
 import com.calclab.hablar.basic.client.ui.page.events.VisibilityChangedEvent;
 import com.calclab.hablar.basic.client.ui.page.events.VisibilityChangedHandler;
 import com.calclab.hablar.core.client.page.PagePresenter;
-import com.calclab.hablar.search.client.N.SearchDisplay.Level;
+import com.calclab.hablar.search.client.SearchDisplay.Level;
 import com.calclab.suco.client.Suco;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;

@@ -2,7 +2,6 @@ package com.calclab.hablar;
 
 import com.calclab.hablar.basic.client.ui.HablarWidget;
 import com.calclab.hablar.chat.client.HablarChat;
-import com.calclab.hablar.login.client.HablarLogin;
 import com.calclab.hablar.roster.client.HablarRoster;
 import com.calclab.hablar.signals.client.HablarSignals;
 import com.google.gwt.core.client.EntryPoint;
@@ -18,10 +17,6 @@ public class HablarEntryPointOld implements EntryPoint {
 	final HablarWidget hablar = new HablarWidget(config.layout);
 
 	HablarChat.install(hablar);
-
-	if (config.hasLogin) {
-	    HablarLogin.install(hablar);
-	}
 
 	if (config.hasRoster) {
 	    boolean isDocked = "left".equals(config.dockRoster);

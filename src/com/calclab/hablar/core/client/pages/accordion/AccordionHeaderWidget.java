@@ -26,8 +26,9 @@ public class AccordionHeaderWidget extends Composite implements HeaderDisplay {
 
     private String currentIconStyle;
 
-    public AccordionHeaderWidget() {
+    public AccordionHeaderWidget(String pageType) {
 	initWidget(uiBinder.createAndBindUi(this));
+	ensureDebugId("AccordionHeaderWidget-" + pageType);
     }
 
     @Override

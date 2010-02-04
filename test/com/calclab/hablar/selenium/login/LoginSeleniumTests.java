@@ -6,7 +6,7 @@ import org.testng.annotations.Test;
 import com.calclab.hablar.selenium.HablarSeleniumTest;
 import com.calclab.suco.client.Suco;
 
-public class LoginTest extends HablarSeleniumTest {
+public class LoginSeleniumTests extends HablarSeleniumTest {
     private LoginPageObject login;
 
     @BeforeClass
@@ -26,15 +26,15 @@ public class LoginTest extends HablarSeleniumTest {
 	login.assertIsDisconnected();
     }
 
-    @Test(dataProvider = "correctlogin")
-    public void signIn(final String user, final String passwd, final String usernode) {
-	login.signIn(user, passwd);
-	login.assertIsConnectedAs(usernode);
+    @Test
+    public void signIn() {
+	login.signIn("test1@localhost", "test1");
+	login.assertIsConnectedAs("test1");
     }
 
-    @Test(dataProvider = "incorrectlogin")
-    public void signInIncorrectPasswd(final String user, final String passwd) {
-	login.signIn(user, passwd);
+    @Test
+    public void signInIncorrectPasswd() {
+	login.signIn("nouser", "nopassword");
 	login.assertIsDisconnected();
     }
 }

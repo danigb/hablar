@@ -5,7 +5,7 @@ import org.openqa.selenium.support.ByIdOrName;
 import org.openqa.selenium.support.FindBy;
 
 import com.calclab.hablar.basic.client.ui.utils.DebugId;
-import com.calclab.hablar.search.client.N.SearchResultItemWidget;
+import com.calclab.hablar.search.client.SearchResultItemWidget;
 import com.calclab.hablar.selenium.PageObject;
 
 public class SearchPageObject extends PageObject {

@@ -1,4 +1,4 @@
-package com.calclab.hablar.search.client.N;
+package com.calclab.hablar.search.client;
 
 import com.calclab.hablar.basic.client.ui.menu.PopupMenuView;
 import com.calclab.hablar.core.client.mvp.Display;

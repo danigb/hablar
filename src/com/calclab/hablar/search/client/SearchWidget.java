@@ -1,4 +1,4 @@
-package com.calclab.hablar.search.client.N;
+package com.calclab.hablar.search.client;
 
 import static com.google.gwt.dom.client.Style.Unit.PX;
 

@@ -83,6 +83,14 @@
 	border-bottom: 1px solid #BBB;
 }
 
+/** LOGIN **/
+.hablar-Login .output {
+	padding: 3px;
+	background-color: white;
+	border-left: 1px solid #BBBBBB;
+	border-top: 1px solid #BBBBBB;
+}
+
 /** LIST ITEMS **/
 .hablar-ListItem {
 	display: block;
@@ -100,15 +108,15 @@
 }
 
 .hablar-RosterWidget .actions {
-    width: 100%;
-    overflow: hidden;
+	width: 100%;
+	overflow: hidden;
 }
 
 .hablar-RosterWidget .actions .gwt-Label {
-    float: left;
-    padding: 1px;
-    border: 1px solid #E9E9E9;
-    margin-right: 3px;
+	float: left;
+	padding: 1px;
+	border: 1px solid #E9E9E9;
+	margin-right: 3px;
 }
 
 .hablar-RosterWidget .actions div.gwt-Label:hover {
@@ -175,9 +183,6 @@ div.hablar-RosterItemWidget:hover {
 	width: 20%;
 }
 
-
-
-
 /** OVERLAY **/
 .hablar-Overlay {
 	background-color: black;
@@ -216,7 +221,7 @@ div.hablar-RosterItemWidget:hover {
 	padding-top: 10px;
 }
 
-.form .gwt-TextBox, .form .gwt-PasswordTextBox {
+.form .gwt-TextBox,.form .gwt-PasswordTextBox {
 	border: 0px;
 	padding: 2px;
 }

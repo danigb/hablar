@@ -9,5 +9,5 @@
 	<inherits name='com.calclab.emite.xep.search.EmiteSearch' />
 
 	<source path="client" />
-	<entry-point class="com.calclab.hablar.search.client.HablarSearchEntryPoint" />
+	<entry-point class="com.calclab.hablar.search.client.HablarSearch" />
 </module>

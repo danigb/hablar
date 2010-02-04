@@ -47,6 +47,7 @@ public class HeaderPresenter implements Presenter<HeaderDisplay> {
 	    @Override
 	    public void onPageInfoChanged(PageInfoChangedEvent event) {
 		display.setIconStyle(state.getPageIcon());
+		display.getHeaderTitle().setText(state.getPageTitle());
 	    }
 	});
 

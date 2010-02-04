@@ -1,4 +1,4 @@
-package com.calclab.hablar.search.client.N;
+package com.calclab.hablar.search.client;
 
 import java.util.List;
 
@@ -9,11 +9,12 @@ import com.calclab.hablar.core.client.HablarWidget;
 import com.calclab.hablar.core.client.page.Page;
 import com.calclab.hablar.core.client.page.PagePresenter;
 import com.calclab.hablar.roster.client.N.RosterPresenter;
+import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 
-public class HablarSearch {
+public class HablarSearch implements EntryPoint {
 
     public static void install(HablarWidget widget) {
 	Hablar hablar = widget.getHablar();
@@ -35,6 +36,10 @@ public class HablarSearch {
 		}
 	    });
 	}
+    }
+
+    @Override
+    public void onModuleLoad() {
     }
 
 }
