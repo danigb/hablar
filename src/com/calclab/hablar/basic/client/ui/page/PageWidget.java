@@ -1,6 +1,6 @@
 package com.calclab.hablar.basic.client.ui.page;
 
-import com.calclab.hablar.basic.client.HablarEventBus;
+import com.calclab.hablar.core.client.mvp.HablarEventBus;
 import com.google.gwt.user.client.ui.Composite;
 
 /**

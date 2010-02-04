@@ -2,13 +2,13 @@ package com.calclab.hablar.openchat.client;
 
 import java.util.List;
 
-import com.calclab.hablar.basic.client.ui.icon.HablarIcons;
-import com.calclab.hablar.basic.client.ui.icon.HablarIcons.IconType;
 import com.calclab.hablar.core.client.Hablar;
 import com.calclab.hablar.core.client.HablarWidget;
 import com.calclab.hablar.core.client.page.Page;
 import com.calclab.hablar.core.client.page.PagePresenter;
 import com.calclab.hablar.core.client.pages.OverlayContainer;
+import com.calclab.hablar.core.client.ui.icon.HablarIcons;
+import com.calclab.hablar.core.client.ui.icon.HablarIcons.IconType;
 import com.calclab.hablar.openchat.client.ui.OpenChatPresenter;
 import com.calclab.hablar.openchat.client.ui.OpenChatWidget;
 import com.calclab.hablar.roster.client.RosterPresenter;

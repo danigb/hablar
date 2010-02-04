@@ -9,7 +9,7 @@ import org.junit.Test;
 import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 import com.calclab.emite.im.client.roster.RosterItem;
 import com.calclab.emite.im.client.roster.SubscriptionState;
-import com.calclab.hablar.basic.client.ui.icon.HablarIcons;
+import com.calclab.hablar.core.client.ui.icon.HablarIcons;
 import com.calclab.hablar.roster.client.RosterItemDisplay;
 import com.calclab.hablar.roster.client.RosterItemPresenter;
 

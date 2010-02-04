@@ -1,8 +1,8 @@
 package com.calclab.hablar.roster.client;
 
 import com.calclab.emite.im.client.roster.RosterItem;
-import com.calclab.hablar.basic.client.ui.icon.PresenceIcon;
 import com.calclab.hablar.core.client.mvp.Presenter;
+import com.calclab.hablar.core.client.ui.icon.PresenceIcon;
 
 public class RosterItemPresenter implements Presenter<RosterItemDisplay> {
 
@@ -26,7 +26,7 @@ public class RosterItemPresenter implements Presenter<RosterItemDisplay> {
 	    display.getStatus().setText(status);
 	}
 	display.setStatusVisible(hasStatus);
-	display.setIcon(PresenceIcon.getIcon(item));
+	display.setIcon(PresenceIcon.getIcon(item.isAvailable(), item.getShow()));
     }
 
 }

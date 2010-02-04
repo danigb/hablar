@@ -1,4 +1,4 @@
-package com.calclab.hablar.basic.client.ui.icon;
+package com.calclab.hablar.core.client.ui.icon;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.resources.client.CssResource;

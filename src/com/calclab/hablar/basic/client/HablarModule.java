@@ -1,6 +1,6 @@
 package com.calclab.hablar.basic.client;
 
-import com.calclab.hablar.basic.client.i18n.Msg;
+import com.calclab.hablar.core.client.i18n.Msg;
 import com.calclab.suco.client.ioc.decorator.Singleton;
 import com.calclab.suco.client.ioc.module.AbstractModule;
 import com.calclab.suco.client.ioc.module.Factory;

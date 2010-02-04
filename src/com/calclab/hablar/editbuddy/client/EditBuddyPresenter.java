@@ -2,11 +2,11 @@ package com.calclab.hablar.editbuddy.client;
 
 import com.calclab.emite.im.client.roster.Roster;
 import com.calclab.emite.im.client.roster.RosterItem;
-import com.calclab.hablar.basic.client.i18n.Msg;
-import com.calclab.hablar.basic.client.ui.menu.MenuAction;
 import com.calclab.hablar.core.client.Hablar;
+import com.calclab.hablar.core.client.i18n.Msg;
 import com.calclab.hablar.core.client.page.PagePresenter;
 import com.calclab.hablar.core.client.pages.OverlayContainer;
+import com.calclab.hablar.core.client.ui.menu.MenuAction;
 import com.calclab.hablar.editbuddy.client.ui.EditBuddyDisplay;
 import com.calclab.suco.client.Suco;
 import com.google.gwt.event.dom.client.ChangeEvent;

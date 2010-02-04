@@ -3,7 +3,7 @@ package com.calclab.hablar.core.client;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.calclab.hablar.basic.client.HablarEventBus;
+import com.calclab.hablar.core.client.mvp.HablarEventBus;
 import com.calclab.hablar.core.client.mvp.Presenter;
 import com.calclab.hablar.core.client.page.ClosePageRequestEvent;
 import com.calclab.hablar.core.client.page.ClosePageRequestHandler;

@@ -1,4 +1,4 @@
-package com.calclab.hablar.basic.client.i18n;
+package com.calclab.hablar.core.client.i18n;
 
 import com.google.gwt.i18n.client.Messages;
 import com.google.gwt.i18n.client.LocalizableResource.DefaultLocale;

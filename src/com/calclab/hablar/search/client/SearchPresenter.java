@@ -8,16 +8,12 @@ import com.calclab.emite.im.client.chat.ChatManager;
 import com.calclab.emite.im.client.roster.Roster;
 import com.calclab.emite.xep.search.client.SearchManager;
 import com.calclab.emite.xep.search.client.SearchResultItem;
-import com.calclab.hablar.basic.client.HablarEventBus;
-import com.calclab.hablar.basic.client.i18n.Msg;
-import com.calclab.hablar.basic.client.ui.icon.HablarIcons;
-import com.calclab.hablar.basic.client.ui.menu.MenuAction;
-import com.calclab.hablar.basic.client.ui.menu.PopupMenuView;
-import com.calclab.hablar.basic.client.ui.page.PageLogic;
-import com.calclab.hablar.basic.client.ui.page.PageView.Visibility;
-import com.calclab.hablar.basic.client.ui.page.events.VisibilityChangedEvent;
-import com.calclab.hablar.basic.client.ui.page.events.VisibilityChangedHandler;
+import com.calclab.hablar.core.client.i18n.Msg;
+import com.calclab.hablar.core.client.mvp.HablarEventBus;
 import com.calclab.hablar.core.client.page.PagePresenter;
+import com.calclab.hablar.core.client.ui.icon.HablarIcons;
+import com.calclab.hablar.core.client.ui.menu.MenuAction;
+import com.calclab.hablar.core.client.ui.menu.PopupMenuView;
 import com.calclab.hablar.search.client.SearchDisplay.Level;
 import com.calclab.suco.client.Suco;
 import com.google.gwt.event.dom.client.ChangeEvent;
@@ -62,16 +58,6 @@ public class SearchPresenter extends PagePresenter<SearchDisplay> {
 	    @Override
 	    public void onChange(ChangeEvent event) {
 		search();
-	    }
-	});
-
-	eventBus.addHandler(VisibilityChangedEvent.TYPE, new VisibilityChangedHandler() {
-	    @Override
-	    public void onVisibilityChanged(VisibilityChangedEvent event) {
-		PageLogic page = event.getPage();
-		if (page.getVisibility() == Visibility.focused) {
-		    display.getSearchFocus().setFocus(true);
-		}
 	    }
 	});
 

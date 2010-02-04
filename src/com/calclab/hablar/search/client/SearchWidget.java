@@ -2,8 +2,8 @@ package com.calclab.hablar.search.client;
 
 import static com.google.gwt.dom.client.Style.Unit.PX;
 
-import com.calclab.hablar.basic.client.ui.menu.PopupMenu;
-import com.calclab.hablar.basic.client.ui.menu.PopupMenuView;
+import com.calclab.hablar.core.client.ui.menu.PopupMenu;
+import com.calclab.hablar.core.client.ui.menu.PopupMenuView;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.FocusEvent;
 import com.google.gwt.event.dom.client.HasChangeHandlers;

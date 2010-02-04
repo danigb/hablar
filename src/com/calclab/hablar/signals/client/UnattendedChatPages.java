@@ -3,7 +3,6 @@ package com.calclab.hablar.signals.client;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.calclab.hablar.basic.client.HablarEventBus;
 import com.calclab.hablar.basic.client.ui.page.PageView;
 import com.calclab.hablar.basic.client.ui.page.PageView.Visibility;
 import com.calclab.hablar.basic.client.ui.page.events.UserMessageEvent;
@@ -13,6 +12,7 @@ import com.calclab.hablar.basic.client.ui.pages.events.PageClosedHandler;
 import com.calclab.hablar.basic.client.ui.pages.events.PageOpenedEvent;
 import com.calclab.hablar.basic.client.ui.pages.events.PageOpenedHandler;
 import com.calclab.hablar.chat.client.ui.ChatPresenter;
+import com.calclab.hablar.core.client.mvp.HablarEventBus;
 
 /**
  * A registry of unattended chat pages. It listen to events and tracks which

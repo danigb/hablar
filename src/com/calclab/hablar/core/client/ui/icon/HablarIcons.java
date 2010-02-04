@@ -1,4 +1,4 @@
-package com.calclab.hablar.basic.client.ui.icon;
+package com.calclab.hablar.core.client.ui.icon;
 
 /**
  * A class to retrieve, mostly, default icons

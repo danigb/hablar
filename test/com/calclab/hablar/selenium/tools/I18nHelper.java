@@ -5,7 +5,7 @@ import java.text.MessageFormat;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.calclab.hablar.basic.client.i18n.Msg;
+import com.calclab.hablar.core.client.i18n.Msg;
 import com.google.gwt.i18n.client.Messages.DefaultMessage;
 import com.google.gwt.i18n.client.Messages.PluralText;
 

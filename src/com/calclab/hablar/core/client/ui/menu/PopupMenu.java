@@ -1,10 +1,9 @@
-package com.calclab.hablar.basic.client.ui.menu;
+package com.calclab.hablar.core.client.ui.menu;
 
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.ui.MenuBar;
 import com.google.gwt.user.client.ui.MenuItem;
 import com.google.gwt.user.client.ui.PopupPanel;
-import com.google.gwt.user.client.ui.UIObject;
 
 public class PopupMenu<T> extends PopupPanel implements PopupMenuView<T> {
     private final MenuBar bar;
@@ -53,12 +52,6 @@ public class PopupMenu<T> extends PopupPanel implements PopupMenuView<T> {
 	this.visible = true;
 	setPopupPosition(left, top);
 	show();
-    }
-
-    @Override
-    public void showRelativeToMenu(final UIObject target) {
-	this.visible = true;
-	super.showRelativeTo(target);
     }
 
 }

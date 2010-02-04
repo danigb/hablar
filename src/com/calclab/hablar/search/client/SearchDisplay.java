@@ -1,7 +1,7 @@
 package com.calclab.hablar.search.client;
 
-import com.calclab.hablar.basic.client.ui.menu.PopupMenuView;
 import com.calclab.hablar.core.client.mvp.Display;
+import com.calclab.hablar.core.client.ui.menu.PopupMenuView;
 import com.google.gwt.event.dom.client.HasChangeHandlers;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.user.client.ui.Focusable;

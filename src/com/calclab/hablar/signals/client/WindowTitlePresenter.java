@@ -1,7 +1,7 @@
 package com.calclab.hablar.signals.client;
 
-import com.calclab.hablar.basic.client.HablarEventBus;
-import com.calclab.hablar.basic.client.i18n.Msg;
+import com.calclab.hablar.core.client.i18n.Msg;
+import com.calclab.hablar.core.client.mvp.HablarEventBus;
 import com.calclab.suco.client.Suco;
 import com.google.gwt.user.client.ui.HasText;
 

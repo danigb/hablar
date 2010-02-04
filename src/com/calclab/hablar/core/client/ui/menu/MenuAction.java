@@ -1,4 +1,4 @@
-package com.calclab.hablar.basic.client.ui.menu;
+package com.calclab.hablar.core.client.ui.menu;
 
 public abstract class MenuAction<T> {
 

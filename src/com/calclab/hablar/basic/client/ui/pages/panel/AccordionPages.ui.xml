@@ -27,7 +27,4 @@
 
 
 
-    <hablar:AccordionPanel ui:field="accordion"
-        styleName="{style.accordion}">
-    </hablar:AccordionPanel>
 </ui:UiBinder> 

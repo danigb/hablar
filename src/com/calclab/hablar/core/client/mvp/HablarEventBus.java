@@ -1,4 +1,4 @@
-package com.calclab.hablar.basic.client;
+package com.calclab.hablar.core.client.mvp;
 
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;

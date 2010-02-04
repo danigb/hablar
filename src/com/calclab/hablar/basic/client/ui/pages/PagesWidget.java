@@ -2,8 +2,8 @@ package com.calclab.hablar.basic.client.ui.pages;
 
 import java.util.List;
 
-import com.calclab.hablar.basic.client.HablarEventBus;
 import com.calclab.hablar.basic.client.ui.page.PageView;
+import com.calclab.hablar.core.client.mvp.HablarEventBus;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 

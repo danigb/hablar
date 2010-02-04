@@ -13,9 +13,9 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.calclab.hablar.basic.client.DefaultEventBus;
 import com.calclab.hablar.basic.client.ui.page.PageView;
 import com.calclab.hablar.basic.client.ui.page.PageView.Visibility;
+import com.calclab.hablar.core.client.mvp.DefaultEventBus;
 
 public class PagesLogicTest {
     private PagesPanel view;

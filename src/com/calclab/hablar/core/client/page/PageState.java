@@ -1,6 +1,6 @@
 package com.calclab.hablar.core.client.page;
 
-import com.calclab.hablar.basic.client.HablarEventBus;
+import com.calclab.hablar.core.client.mvp.HablarEventBus;
 import com.calclab.hablar.core.client.page.PagePresenter.XVis;
 
 public class PageState {

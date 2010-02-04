@@ -3,9 +3,7 @@ package com.calclab.hablar.basic.client.ui;
 import static com.google.gwt.dom.client.Style.Unit.PCT;
 import static com.google.gwt.dom.client.Style.Unit.PX;
 
-import com.calclab.hablar.basic.client.DefaultEventBus;
 import com.calclab.hablar.basic.client.Hablar;
-import com.calclab.hablar.basic.client.HablarEventBus;
 import com.calclab.hablar.basic.client.ui.page.HeaderStyles;
 import com.calclab.hablar.basic.client.ui.page.PageHeader;
 import com.calclab.hablar.basic.client.ui.page.PageView;
@@ -17,6 +15,9 @@ import com.calclab.hablar.basic.client.ui.pages.PagesPanel;
 import com.calclab.hablar.basic.client.ui.pages.PagesWidget;
 import com.calclab.hablar.basic.client.ui.pages.panel.AccordionPages;
 import com.calclab.hablar.basic.client.ui.pages.panel.TabPages;
+import com.calclab.hablar.core.client.HablarDisplay;
+import com.calclab.hablar.core.client.mvp.DefaultEventBus;
+import com.calclab.hablar.core.client.mvp.HablarEventBus;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -33,10 +34,6 @@ import com.google.gwt.user.client.ui.Widget;
  * 
  */
 public class HablarWidget extends Composite implements Hablar {
-
-    public static enum Layout {
-	accordion, tabs
-    }
 
     interface ChatPanelUiBinder extends UiBinder<Widget, HablarWidget> {
     }
@@ -66,8 +63,8 @@ public class HablarWidget extends Composite implements Hablar {
     private final DefaultEventBus eventBus;
 
     @UiConstructor
-    public HablarWidget(HablarWidget.Layout layout) {
-	this(layout == HablarWidget.Layout.accordion ? new AccordionPages() : new TabPages());
+    public HablarWidget(HablarDisplay.Layout layout) {
+	this(layout == HablarDisplay.Layout.accordion ? new AccordionPages() : new TabPages());
     }
 
     private HablarWidget(PagesPanel panel) {

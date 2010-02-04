@@ -2,7 +2,7 @@
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
 	xmlns:g="urn:import:com.google.gwt.user.client.ui">
 
-	<ui:style type="com.calclab.hablar.basic.client.ui.icon.DefaultHablarIcons.Styles">
+	<ui:style type="com.calclab.hablar.core.client.ui.icon.DefaultHablarIcons.Styles">
 		.active {
 			background-color: #EEEEEE;
 		}
@@ -13,7 +13,7 @@
 	</ui:style>
 
 	<ui:style field="icons"
-		type="com.calclab.hablar.basic.client.ui.icon.DefaultHablarIcons.StyleIcons">
+		type="com.calclab.hablar.core.client.ui.icon.DefaultHablarIcons.StyleIcons">
 			@sprite .buddyIcon {
 				gwt-image: 'buddy';
 			}

@@ -1,7 +1,6 @@
 package com.calclab.hablar;
 
 import com.calclab.hablar.basic.client.ui.HablarWidget;
-import com.calclab.hablar.signals.client.HablarSignals;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.RootPanel;
@@ -13,10 +12,6 @@ public class HablarEntryPointOld implements EntryPoint {
     public void onModuleLoad() {
 	final HablarConfig config = HablarConfig.getFromMeta();
 	final HablarWidget hablar = new HablarWidget(config.layout);
-
-	if (config.hasSignals) {
-	    HablarSignals.install(hablar);
-	}
 
 	if (config.inline == null) {
 	    createDialog(hablar, config);

@@ -3,7 +3,6 @@ package com.calclab.hablar.basic.client.ui.pages;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.calclab.hablar.basic.client.HablarEventBus;
 import com.calclab.hablar.basic.client.ui.page.PageLogic;
 import com.calclab.hablar.basic.client.ui.page.PageView;
 import com.calclab.hablar.basic.client.ui.page.PageView.Visibility;
@@ -17,6 +16,7 @@ import com.calclab.hablar.basic.client.ui.page.events.VisibilityChangedEvent;
 import com.calclab.hablar.basic.client.ui.page.events.VisibilityChangedHandler;
 import com.calclab.hablar.basic.client.ui.pages.events.PageClosedEvent;
 import com.calclab.hablar.basic.client.ui.pages.events.PageOpenedEvent;
+import com.calclab.hablar.core.client.mvp.HablarEventBus;
 import com.google.gwt.core.client.GWT;
 
 public class PagesLogic implements Pages {

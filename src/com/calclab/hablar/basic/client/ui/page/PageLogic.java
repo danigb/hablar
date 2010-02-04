@@ -1,10 +1,10 @@
 package com.calclab.hablar.basic.client.ui.page;
 
-import com.calclab.hablar.basic.client.HablarEventBus;
 import com.calclab.hablar.basic.client.ui.page.PageView.Visibility;
 import com.calclab.hablar.basic.client.ui.page.events.ClosePageEvent;
 import com.calclab.hablar.basic.client.ui.page.events.OpenPageEvent;
 import com.calclab.hablar.basic.client.ui.page.events.UserMessageEvent;
+import com.calclab.hablar.core.client.mvp.HablarEventBus;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 

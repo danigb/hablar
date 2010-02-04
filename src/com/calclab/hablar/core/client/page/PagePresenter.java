@@ -1,7 +1,7 @@
 package com.calclab.hablar.core.client.page;
 
-import com.calclab.hablar.basic.client.HablarEventBus;
 import com.calclab.hablar.core.client.mvp.Display;
+import com.calclab.hablar.core.client.mvp.HablarEventBus;
 
 public class PagePresenter<T extends Display> implements Page<T> {
     public static enum XVis {

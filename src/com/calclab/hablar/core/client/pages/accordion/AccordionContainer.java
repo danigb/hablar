@@ -2,7 +2,6 @@ package com.calclab.hablar.core.client.pages.accordion;
 
 import static com.google.gwt.dom.client.Style.Unit.PX;
 
-import com.calclab.hablar.basic.client.ui.pages.panel.AccordionPanel;
 import com.calclab.hablar.core.client.page.Page;
 import com.calclab.hablar.core.client.pages.HeaderPresenter;
 import com.calclab.hablar.core.client.pages.PagesContainer;

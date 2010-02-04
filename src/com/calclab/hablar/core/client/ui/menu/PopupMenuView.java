@@ -1,6 +1,5 @@
-package com.calclab.hablar.basic.client.ui.menu;
+package com.calclab.hablar.core.client.ui.menu;
 
-import com.google.gwt.user.client.ui.UIObject;
 
 public interface PopupMenuView<T> {
     void addAction(MenuAction<T> action);
@@ -13,5 +12,4 @@ public interface PopupMenuView<T> {
 
     void show(int left, int top);
 
-    void showRelativeToMenu(UIObject ui);
 }
