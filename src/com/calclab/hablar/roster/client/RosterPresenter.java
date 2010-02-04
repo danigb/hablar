@@ -23,6 +23,7 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 
 public class RosterPresenter extends PagePresenter<RosterDisplay> {
+    private static int index = 0;
     public static final String TYPE = "Roster";
     private boolean active;
     private final Msg i18n;
@@ -32,7 +33,7 @@ public class RosterPresenter extends PagePresenter<RosterDisplay> {
     private PopupMenu<RosterItem> itemMenu;
 
     public RosterPresenter(HablarEventBus eventBus, RosterDisplay display) {
-	super(TYPE, eventBus, display);
+	super(TYPE, "" + (++index), eventBus, display);
 	i18n = Suco.get(Msg.class);
 	manager = Suco.get(ChatManager.class);
 	roster = Suco.get(Roster.class);

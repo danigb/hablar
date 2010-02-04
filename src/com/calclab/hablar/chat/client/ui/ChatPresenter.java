@@ -1,4 +1,4 @@
-package com.calclab.hablar.chat.N;
+package com.calclab.hablar.chat.client.ui;
 
 import com.calclab.emite.core.client.xmpp.stanzas.Message;
 import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
@@ -12,8 +12,6 @@ import com.calclab.hablar.basic.client.i18n.Msg;
 import com.calclab.hablar.basic.client.ui.icon.HablarIcons;
 import com.calclab.hablar.basic.client.ui.icon.PresenceIcon;
 import com.calclab.hablar.basic.client.ui.icon.HablarIcons.IconType;
-import com.calclab.hablar.chat.client.ui.ChatMessageFormatter;
-import com.calclab.hablar.chat.client.ui.ChatPageView;
 import com.calclab.hablar.core.client.page.PagePresenter;
 import com.calclab.suco.client.Suco;
 import com.calclab.suco.client.events.Listener;
@@ -23,11 +21,15 @@ import com.google.gwt.event.dom.client.KeyDownEvent;
 import com.google.gwt.event.dom.client.KeyDownHandler;
 
 public class ChatPresenter extends PagePresenter<ChatDisplay> {
-
     public static final String TYPE = "Chat";
 
+    public static String createId(String uri) {
+	return uri.replace("@", "-").replace("/", "-");
+    }
+
     public ChatPresenter(HablarEventBus eventBus, final Chat chat, final ChatDisplay display) {
-	super(TYPE, eventBus, display);
+	super(TYPE, createId(chat.getURI().toString()), eventBus, display);
+	display.setId(getId());
 	final Msg i18n = Suco.get(Msg.class);
 	final XmppURI fromURI = chat.getURI();
 	final String name = getName(fromURI);
@@ -39,7 +41,7 @@ public class ChatPresenter extends PagePresenter<ChatDisplay> {
 	    public void onEvent(final Message message) {
 		final String body = ChatMessageFormatter.format(message.getBody());
 		if (body != null) {
-		    display.showMessage(name, body, ChatPageView.MessageType.incoming);
+		    display.showMessage(name, body, ChatDisplay.MessageType.incoming);
 		    getState().setPageTitle(i18n.newChatFrom(name, ChatMessageFormatter.ellipsis(body, 25)));
 		}
 	    }
@@ -91,7 +93,7 @@ public class ChatPresenter extends PagePresenter<ChatDisplay> {
 	String text = display.getBody().getText().trim();
 	if (!text.isEmpty()) {
 	    final String body = ChatMessageFormatter.format(text);
-	    display.showMessage("me", body, ChatPageView.MessageType.sent);
+	    display.showMessage("me", body, ChatDisplay.MessageType.sent);
 	    chat.send(new Message(text));
 	    display.clearAndFocus();
 	}

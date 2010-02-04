@@ -8,7 +8,6 @@ public class EditBuddyPageSeleniumTests extends HablarSeleniumTest {
 
     @Test
     public void shouldEditBuddy() {
-	login("test1");
-
+	login("test1@localhost", "test1");
     }
 }

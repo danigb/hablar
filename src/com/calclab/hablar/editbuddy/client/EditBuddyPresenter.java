@@ -18,7 +18,7 @@ import com.google.gwt.event.dom.client.ClickHandler;
  * Presenter in MVP pattern. Controls the EditBuddy form
  */
 public class EditBuddyPresenter extends PagePresenter<EditBuddyDisplay> {
-    private static final String DEBUGID_EDITBUDDY = "Action-EditBuddy";
+    private static int index = 0;
     protected static final String[] EMPTY_ARRAY = new String[0];
     private final Hablar hablar;
     private final Msg i18n;
@@ -27,12 +27,12 @@ public class EditBuddyPresenter extends PagePresenter<EditBuddyDisplay> {
     private RosterItem currentItem;
 
     public EditBuddyPresenter(Hablar hablar, EditBuddyDisplay display) {
-	super("EditButty", hablar.getEventBus(), display);
+	super("EditButty", "" + (++index), hablar.getEventBus(), display);
 	this.hablar = hablar;
 	i18n = Suco.get(Msg.class);
 	roster = Suco.get(Roster.class);
 
-	this.action = new MenuAction<RosterItem>(i18n.changeNickName(), DEBUGID_EDITBUDDY) {
+	this.action = new MenuAction<RosterItem>(i18n.changeNickName(), "EditBuddy-editAction") {
 	    @Override
 	    public void execute(RosterItem target) {
 		onChangeNickName(target);

@@ -1,4 +1,4 @@
-package com.calclab.hablar.chat.N;
+package com.calclab.hablar.chat.client;
 
 import java.util.HashMap;
 import java.util.Set;
@@ -9,13 +9,15 @@ import com.calclab.emite.im.client.chat.Chat;
 import com.calclab.emite.im.client.chat.ChatManager;
 import com.calclab.emite.im.client.roster.Roster;
 import com.calclab.emite.im.client.roster.RosterItem;
-import com.calclab.hablar.chat.client.ChatConfig;
+import com.calclab.hablar.chat.client.ui.ChatDisplay;
+import com.calclab.hablar.chat.client.ui.ChatPresenter;
+import com.calclab.hablar.chat.client.ui.ChatWidget;
 import com.calclab.hablar.core.client.Hablar;
 import com.calclab.hablar.core.client.page.PagePresenter.XVis;
 import com.calclab.suco.client.Suco;
 import com.calclab.suco.client.events.Listener;
 
-public class ChatsPresenter {
+public class ChatManagerController {
 
     public static interface ChatPageFactory {
 
@@ -29,7 +31,7 @@ public class ChatsPresenter {
 
     private final Hablar hablar;
 
-    public ChatsPresenter(Hablar hablar, ChatConfig config) {
+    public ChatManagerController(Hablar hablar, ChatConfig config) {
 	this(hablar, config, new ChatPageFactory() {
 	    @Override
 	    public ChatDisplay create(boolean sendButtonVisible) {
@@ -38,7 +40,7 @@ public class ChatsPresenter {
 	});
     }
 
-    public ChatsPresenter(Hablar hablar, ChatConfig config, ChatPageFactory factory) {
+    public ChatManagerController(Hablar hablar, ChatConfig config, ChatPageFactory factory) {
 	this.hablar = hablar;
 	this.factory = factory;
 	this.chatPages = new HashMap<XmppURI, ChatPresenter>();

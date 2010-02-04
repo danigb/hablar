@@ -10,15 +10,15 @@ public class PagePresenter<T extends Display> implements Page<T> {
     protected final T display;
     protected final HablarEventBus eventBus;
     private final String pageType;
-    private final PageID id;
+    private final String id;
 
     private final PageState state;
 
-    public PagePresenter(String pageType, HablarEventBus eventBus, T display) {
+    public PagePresenter(String pageType, String id, HablarEventBus eventBus, T display) {
 	this.pageType = pageType;
 	this.eventBus = eventBus;
 	this.display = display;
-	this.id = PageID.create();
+	this.id = pageType + "-" + id;
 	state = new PageState(eventBus, this);
     }
 
@@ -27,17 +27,17 @@ public class PagePresenter<T extends Display> implements Page<T> {
 	return display;
     }
 
-    public PageID getId() {
+    public String getId() {
 	return id;
+    }
+
+    public String getPageType() {
+	return pageType;
     }
 
     @Override
     public PageState getState() {
 	return state;
-    }
-
-    public String getPageType() {
-	return pageType;
     }
 
     @Override

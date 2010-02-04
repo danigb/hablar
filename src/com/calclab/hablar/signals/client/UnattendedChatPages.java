@@ -12,7 +12,7 @@ import com.calclab.hablar.basic.client.ui.pages.events.PageClosedEvent;
 import com.calclab.hablar.basic.client.ui.pages.events.PageClosedHandler;
 import com.calclab.hablar.basic.client.ui.pages.events.PageOpenedEvent;
 import com.calclab.hablar.basic.client.ui.pages.events.PageOpenedHandler;
-import com.calclab.hablar.chat.client.ui.ChatPageWidget;
+import com.calclab.hablar.chat.client.ui.ChatPresenter;
 
 /**
  * A registry of unattended chat pages. It listen to events and tracks which
@@ -84,7 +84,7 @@ public class UnattendedChatPages {
     }
 
     private boolean isChatPage(final PageView page) {
-	return page.getPageType() == ChatPageWidget.TYPE;
+	return page.getPageType() == ChatPresenter.TYPE;
     }
 
 }

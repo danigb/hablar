@@ -9,11 +9,12 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 
 public class OpenChatPresenter extends PagePresenter<OpenChatDisplay> {
-    private static final String TYPE = "OpenChat";
+    private static int index = 0;
+    public static final String TYPE = "OpenChat";
     private final ChatManager manager;
 
     public OpenChatPresenter(final Hablar hablar, final OpenChatDisplay display) {
-	super(TYPE, hablar.getEventBus(), display);
+	super(TYPE, "" + (++index), hablar.getEventBus(), display);
 
 	manager = Suco.get(ChatManager.class);
 

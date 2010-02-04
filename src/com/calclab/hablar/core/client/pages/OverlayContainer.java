@@ -4,7 +4,6 @@ import static com.google.gwt.dom.client.Style.Unit.PCT;
 import static com.google.gwt.dom.client.Style.Unit.PX;
 
 import com.calclab.hablar.core.client.page.Page;
-import com.calclab.hablar.core.client.page.PagePresenter;
 import com.google.gwt.layout.client.Layout.AnimationCallback;
 import com.google.gwt.layout.client.Layout.Layer;
 import com.google.gwt.user.client.ui.LayoutPanel;
@@ -14,7 +13,7 @@ public class OverlayContainer implements PagesContainer {
     private static final String STYLE_OVERLAY = "hablar-Overlay";
     public static final String TYPE = "Overlay";
     private final LayoutPanel panel;
-    private PagePresenter<?> currentPagePresenter;
+    private Page<?> currentPagePresenter;
 
     public OverlayContainer(LayoutPanel container) {
 	this.panel = new LayoutPanel();
@@ -26,7 +25,7 @@ public class OverlayContainer implements PagesContainer {
     }
 
     @Override
-    public boolean add(PagePresenter<?> page) {
+    public boolean add(Page<?> page) {
 	assert currentPagePresenter == null : "Only one page in overlay";
 	this.currentPagePresenter = page;
 	Widget widget = currentPagePresenter.getDisplay().asWidget();

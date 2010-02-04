@@ -1,6 +1,6 @@
 package com.calclab.hablar;
 
-import com.calclab.hablar.chat.N.HablarChat;
+import com.calclab.hablar.chat.client.HablarChat;
 import com.calclab.hablar.core.client.HablarWidget;
 import com.calclab.hablar.editbuddy.client.HablarEditBuddy;
 import com.calclab.hablar.login.client.HablarLogin;

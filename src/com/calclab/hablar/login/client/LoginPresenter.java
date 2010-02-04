@@ -14,11 +14,12 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 
 public class LoginPresenter extends PagePresenter<LoginDisplay> {
+    private static int index = 0;
     private final Session session;
     private final Msg i18n;
 
     public LoginPresenter(HablarEventBus eventBus, LoginDisplay display) {
-	super("Login", eventBus, display);
+	super("Login", "" + (++index), eventBus, display);
 	this.session = Suco.get(Session.class);
 	this.i18n = Suco.get(Msg.class);
 	getState().setPageIcon(HablarIcons.get(IconType.off));

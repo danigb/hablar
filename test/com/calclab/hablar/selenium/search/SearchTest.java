@@ -26,15 +26,6 @@ public class SearchTest extends HablarSeleniumTest {
     }
 
     @Test()
-    public void testBasicSearchAndChat() {
-	loginSearchTestUserAndChat();
-	chat.getTalkBox().sendKeys("Hi ;)\n");
-	chat.getTalkBox().sendKeys("some echo tests\n");
-	// Uncomment to don't close the window
-	// mustCloseFinally = false;
-    }
-
-    @Test()
     public void testBasicSearchNoResult() {
 	loginAndSearchClick();
 	search.getTerm().clear();

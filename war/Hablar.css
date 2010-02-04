@@ -171,6 +171,24 @@ div.hablar-RosterItemWidget:hover {
 	border: 1px solid #BBBBBB;
 }
 
+.hablar-ChatWidget .chatMessage {
+	display: block;
+	width: 94%;
+	overflow: hidden;
+	padding: 3px 3% 0 3%;
+}
+
+.hablar-ChatWidget .author {
+	display: block;
+	float: left;
+	font-weight: bold;
+}
+
+.hablar-ChatWidget .body {
+	margin-left: 10px;
+	float: left;
+}
+
 /** SEARCH PAGE **/
 .hablar-Search .searchBox {
 	width: 78%;

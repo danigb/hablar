@@ -13,7 +13,7 @@ public interface Page<T extends Display> extends Presenter<T> {
     /**
      * All pages have a unique PageID reference
      */
-    public PageID getId();
+    public String getId();
 
     public PageState getState();
 

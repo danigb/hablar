@@ -31,17 +31,17 @@ public class SearchPresenter extends PagePresenter<SearchDisplay> {
     public static final String CHAT_DEB_ID = "SearchLogic-chat";
     public static final String ADD_ROSTERITEM_DEB_ID = "SearchLogic-add-item";
     public static final String REMOVE_ROSTERITEM_DEB_ID = "SearchLogic-remove-item";
+    private static int index = 0;
 
     private final SearchManager manager;
     private final Roster roster;
     private final Msg i18n;
 
     private PopupMenuView<SearchResultItemPresenter> addToRosterMenu;
-
     private PopupMenuView<SearchResultItemPresenter> removeFromRosterMenu;
 
     public SearchPresenter(HablarEventBus eventBus, SearchWidget display) {
-	super("HablarSearch", eventBus, display);
+	super("HablarSearch", "" + (++index), eventBus, display);
 	manager = Suco.get(SearchManager.class);
 	roster = Suco.get(Roster.class);
 	i18n = Suco.get(Msg.class);

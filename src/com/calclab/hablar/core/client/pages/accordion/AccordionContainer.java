@@ -4,7 +4,6 @@ import static com.google.gwt.dom.client.Style.Unit.PX;
 
 import com.calclab.hablar.basic.client.ui.pages.panel.AccordionPanel;
 import com.calclab.hablar.core.client.page.Page;
-import com.calclab.hablar.core.client.page.PagePresenter;
 import com.calclab.hablar.core.client.pages.HeaderPresenter;
 import com.calclab.hablar.core.client.pages.PagesContainer;
 import com.google.gwt.user.client.ui.LayoutPanel;
@@ -24,8 +23,9 @@ public class AccordionContainer implements PagesContainer {
     }
 
     @Override
-    public boolean add(PagePresenter<?> page) {
-	HeaderPresenter header = new HeaderPresenter(page.getState(), new AccordionHeaderWidget(page.getPageType()));
+    public boolean add(Page<?> page) {
+	AccordionHeaderWidget headerWidget = new AccordionHeaderWidget(page.getId());
+	HeaderPresenter header = new HeaderPresenter(page.getState(), headerWidget);
 	accordion.add(page.getDisplay().asWidget(), header.getDisplay().asWidget(), SIZE_HEADER);
 	return true;
     }

@@ -13,7 +13,7 @@ public class RosterPageObject extends PageObject {
     @FindBy(id = "gwt-debug-RosterWidget-disabledPanel")
     private RenderedWebElement disabledLabel;
 
-    @FindBy(id = "gwt-debug-AccordionHeaderWidget-Roster")
+    @FindBy(id = "gwt-debug-AccordionHeaderWidget-Roster-1")
     private RenderedWebElement header;
 
     @FindBy(id = DebugId.PRE + HablarLogic.SEARCH_ICON)

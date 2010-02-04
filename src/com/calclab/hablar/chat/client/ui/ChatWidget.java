@@ -1,9 +1,7 @@
-package com.calclab.hablar.chat.N;
+package com.calclab.hablar.chat.client.ui;
 
 import static com.google.gwt.dom.client.Style.Unit.PX;
 
-import com.calclab.hablar.chat.client.ui.ChatMessage;
-import com.calclab.hablar.chat.client.ui.ChatPageView.MessageType;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.event.dom.client.HasKeyDownHandlers;
@@ -82,7 +80,16 @@ public class ChatWidget extends Composite implements ChatDisplay {
     }
 
     @Override
-    public void showMessage(String name, String body, MessageType messageType) {
+    public void setId(String id) {
+	page.ensureDebugId("ChatWidget-" + id);
+	talkBox.ensureDebugId("ChatWidget-talkBox-" + id);
+	send.ensureDebugId("ChatWidget-send-" + id);
+	list.ensureDebugId("ChatWidget-list-" + id);
+	scroll.ensureDebugId("ChatWidget-srcoll-" + id);
+    }
+
+    @Override
+    public void showMessage(String name, String body, ChatDisplay.MessageType messageType) {
 	final ChatMessage message = new ChatMessage(name, body, messageType);
 	list.add(message);
 	scroll.ensureVisible(message);
