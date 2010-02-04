@@ -16,6 +16,8 @@ public interface Hablar extends Presenter<HablarDisplay> {
 
     public void addPage(PagePresenter<?> page, String containerType);
 
+    public PagesContainer getContainer(String rol);
+
     public HablarDisplay getDisplay();
 
     public HablarEventBus getEventBus();

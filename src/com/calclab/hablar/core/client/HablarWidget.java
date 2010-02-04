@@ -1,26 +1,17 @@
 package com.calclab.hablar.core.client;
 
 import com.calclab.hablar.core.client.mvp.LoggerEventBus;
-import com.calclab.hablar.core.client.pages.OverlayContainer;
-import com.calclab.hablar.core.client.pages.accordion.AccordionContainer;
-import com.calclab.hablar.core.client.pages.tabs.TabsContainer;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.LayoutPanel;
 import com.google.gwt.user.client.ui.Widget;
 
 public class HablarWidget extends Composite implements HablarDisplay {
     private LayoutPanel panel;
-    private final Hablar hablarPresenter;
+    private final Hablar hablar;
 
     public HablarWidget(HablarDisplay.Layout layout) {
 	initWidget(panel = new LayoutPanel());
-	hablarPresenter = new HablarPresenter(new LoggerEventBus(), this);
-	hablarPresenter.addContainer(new OverlayContainer(panel));
-	if (layout == HablarDisplay.Layout.accordion) {
-	    hablarPresenter.addContainer(new AccordionContainer(panel));
-	} else if (layout == HablarDisplay.Layout.tabs) {
-	    hablarPresenter.addContainer(new TabsContainer(panel));
-	}
+	hablar = new HablarPresenter(new LoggerEventBus(), layout, this);
     }
 
     @Override
@@ -28,8 +19,13 @@ public class HablarWidget extends Composite implements HablarDisplay {
 	return this;
     }
 
+    @Override
+    public LayoutPanel getContainer() {
+	return panel;
+    }
+
     public Hablar getHablar() {
-	return hablarPresenter;
+	return hablar;
     }
 
     public LayoutPanel getPanel() {

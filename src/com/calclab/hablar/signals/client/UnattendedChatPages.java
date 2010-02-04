@@ -69,7 +69,7 @@ public class UnattendedChatPages {
     }
 
     private boolean isChatPage(final Page<?> page) {
-	return page.getPageType() == ChatPresenter.TYPE;
+	return page.getType() == ChatPresenter.TYPE;
     }
 
     private void onChatVisibilityChanged(Page<?> page) {

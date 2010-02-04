@@ -2,10 +2,13 @@ package com.calclab.hablar;
 
 import com.calclab.hablar.chat.client.HablarChat;
 import com.calclab.hablar.core.client.HablarWidget;
+import com.calclab.hablar.dock.client.DockConfig;
+import com.calclab.hablar.dock.client.HablarDock;
 import com.calclab.hablar.editbuddy.client.HablarEditBuddy;
 import com.calclab.hablar.login.client.HablarLogin;
 import com.calclab.hablar.openchat.client.HablarOpenChat;
 import com.calclab.hablar.roster.client.HablarRoster;
+import com.calclab.hablar.roster.client.RosterPresenter;
 import com.calclab.hablar.search.client.HablarSearch;
 import com.calclab.hablar.signals.client.HablarSignals;
 import com.google.gwt.core.client.EntryPoint;
@@ -21,6 +24,14 @@ public class HablarEntryPoint implements EntryPoint {
 	final HablarWidget widget = new HablarWidget(config.layout);
 
 	HablarChat.install(widget);
+
+	if (config.dockRoster.equals("left")) {
+	    DockConfig dock = new DockConfig(RosterPresenter.TYPE, 250, null, 0);
+	    HablarDock.install(widget, dock);
+	} else if (config.dockRoster.equals("right")) {
+	    DockConfig dock = new DockConfig(null, 0, RosterPresenter.TYPE, 250);
+	    HablarDock.install(widget, dock);
+	}
 
 	if (config.hasLogin) {
 	    HablarLogin.install(widget);

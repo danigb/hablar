@@ -12,8 +12,8 @@ import com.google.gwt.user.client.ui.Widget;
 public class TabsContainer extends MainContainer {
     private static final double SIZE_HEADER = 24;
 
-    public TabsContainer(LayoutPanel container) {
-	super(new TabLayoutPanel(SIZE_HEADER, PX), container);
+    public TabsContainer(LayoutPanel parent) {
+	super(new TabLayoutPanel(SIZE_HEADER, PX), parent);
     }
 
     @Override

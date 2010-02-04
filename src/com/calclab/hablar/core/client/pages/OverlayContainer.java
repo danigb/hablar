@@ -18,20 +18,39 @@ public class OverlayContainer implements PagesContainer {
     private Page<?> currentPagePresenter;
     private final ArrayList<Page<?>> pages;
 
-    public OverlayContainer(LayoutPanel container) {
+    public OverlayContainer(LayoutPanel parent) {
 	this.panel = new LayoutPanel();
 	this.pages = new ArrayList<Page<?>>();
-	container.add(panel);
-	container.setWidgetLeftRight(panel, 0, PX, 0, PX);
-	container.setWidgetTopBottom(panel, 0, PX, 0, PX);
-	container.forceLayout();
 	panel.setVisible(false);
+	parent.add(panel);
+	parent.setWidgetLeftRight(panel, 0, PX, 0, PX);
+	parent.setWidgetTopBottom(panel, 0, PX, 0, PX);
+	parent.forceLayout();
     }
 
     @Override
     public boolean add(Page<?> page) {
 	pages.add(page);
 	return true;
+    }
+
+    @Override
+    public boolean focus(Page<?> page) {
+	if (pages.contains(page)) {
+	    assert currentPagePresenter == null : "Only one page in overlay";
+	    this.currentPagePresenter = page;
+	    Widget widget = currentPagePresenter.getDisplay().asWidget();
+	    widget.addStyleName(STYLE_OVERLAY);
+	    panel.add(widget);
+	    panel.setWidgetLeftRight(widget, 0, PX, 0, PX);
+	    panel.setWidgetTopHeight(widget, 0, PX, 0, PX);
+	    panel.forceLayout();
+	    panel.setVisible(true);
+	    panel.setWidgetTopHeight(widget, 0, PX, 100, PCT);
+	    panel.animate(500);
+	    return true;
+	}
+	return false;
     }
 
     @Override
@@ -65,22 +84,6 @@ public class OverlayContainer implements PagesContainer {
 	    return true;
 	}
 	return false;
-    }
-
-    @Override
-    public boolean focus(Page<?> page) {
-	assert currentPagePresenter == null : "Only one page in overlay";
-	this.currentPagePresenter = page;
-	Widget widget = currentPagePresenter.getDisplay().asWidget();
-	widget.addStyleName(STYLE_OVERLAY);
-	panel.add(widget);
-	panel.setWidgetLeftRight(widget, 0, PX, 0, PX);
-	panel.setWidgetTopHeight(widget, 0, PX, 0, PX);
-	panel.forceLayout();
-	panel.setVisible(true);
-	panel.setWidgetTopHeight(widget, 0, PX, 100, PCT);
-	panel.animate(500);
-	return true;
     }
 
     @Override

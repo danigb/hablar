@@ -4,7 +4,6 @@ import static com.google.gwt.dom.client.Style.Unit.PX;
 
 import java.util.HashMap;
 
-import com.calclab.hablar.core.client.HablarDisplay;
 import com.calclab.hablar.core.client.page.Page;
 import com.calclab.hablar.core.client.page.PagePresenter.Visibility;
 import com.google.gwt.user.client.ui.HasWidgets;
@@ -12,7 +11,6 @@ import com.google.gwt.user.client.ui.LayoutPanel;
 import com.google.gwt.user.client.ui.Widget;
 
 public abstract class MainContainer implements PagesContainer {
-
     private static class PageAndHead {
 	public final Widget pageWidget;
 	public final Widget headWidget;
@@ -23,6 +21,8 @@ public abstract class MainContainer implements PagesContainer {
 	}
 
     }
+
+    public static final String ROL = "Main";
     private final Widget container;
 
     private final HashMap<Page<?>, PageAndHead> pages;
@@ -34,7 +34,6 @@ public abstract class MainContainer implements PagesContainer {
 	parent.setWidgetLeftRight(container, 0, PX, 0, PX);
 	parent.setWidgetTopBottom(container, 0, PX, 0, PX);
 	parent.forceLayout();
-
     }
 
     @Override
@@ -51,8 +50,21 @@ public abstract class MainContainer implements PagesContainer {
     }
 
     @Override
+    public boolean focus(Page<?> page) {
+	PageAndHead widgets = getWidgets(page);
+	if (widgets != null) {
+	    if (page.getState().getVisibility() == Visibility.hidden) {
+		add(container, widgets.pageWidget, widgets.headWidget);
+	    }
+	    focus(container, widgets.pageWidget);
+	    return true;
+	}
+	return false;
+    }
+
+    @Override
     public String getRol() {
-	return HablarDisplay.ROL_MAIN;
+	return ROL;
     }
 
     @Override
@@ -65,19 +77,6 @@ public abstract class MainContainer implements PagesContainer {
 	PageAndHead widgets = getWidgets(page);
 	if (widgets != null) {
 	    ((HasWidgets) container).remove(widgets.pageWidget);
-	    return true;
-	}
-	return false;
-    }
-
-    @Override
-    public boolean focus(Page<?> page) {
-	PageAndHead widgets = getWidgets(page);
-	if (widgets != null) {
-	    if (page.getState().getVisibility() == Visibility.hidden) {
-		add(container, widgets.pageWidget, widgets.headWidget);
-	    }
-	    focus(container, widgets.pageWidget);
 	    return true;
 	}
 	return false;

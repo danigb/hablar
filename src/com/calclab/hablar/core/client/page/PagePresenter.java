@@ -33,7 +33,7 @@ public class PagePresenter<T extends Display> implements Page<T> {
 	return id;
     }
 
-    public String getPageType() {
+    public String getType() {
 	return pageType;
     }
 

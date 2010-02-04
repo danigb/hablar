@@ -17,7 +17,7 @@ public interface Page<T extends Display> extends Presenter<T> {
 
     public PageState getState();
 
-    public String getPageType();
+    public String getType();
 
     public void requestHide();
 

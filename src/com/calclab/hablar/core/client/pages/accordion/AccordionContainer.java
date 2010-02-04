@@ -9,8 +9,8 @@ import com.google.gwt.user.client.ui.Widget;
 public class AccordionContainer extends MainContainer {
     private static final double SIZE_HEADER = 24;
 
-    public AccordionContainer(LayoutPanel container) {
-	super(new AccordionPanel(), container);
+    public AccordionContainer(LayoutPanel parent) {
+	super(new AccordionPanel(), parent);
     }
 
     @Override
