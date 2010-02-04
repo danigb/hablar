@@ -21,7 +21,7 @@ public class PageState {
 	eventBus.addHandler(PageInfoChangedEvent.TYPE, new PageInfoChangedHandler() {
 	    @Override
 	    public void onPageInfoChanged(PageInfoChangedEvent event) {
-		if (event.getPagePresenter() == page) {
+		if (event.getPage() == page) {
 		    handler.onPageInfoChanged(event);
 		}
 	    }
@@ -32,7 +32,7 @@ public class PageState {
 	eventBus.addHandler(VisibilityChangedEvent.TYPE, new VisibilityChangedHandler() {
 	    @Override
 	    public void onVisibilityChanged(VisibilityChangedEvent event) {
-		if (event.getPagePresenter() == page) {
+		if (event.getPage() == page) {
 		    handler.onVisibilityChanged(event);
 		}
 	    }
@@ -87,6 +87,7 @@ public class PageState {
 
     public void setUserMessage(String userMessage) {
 	this.userMessage = userMessage;
+	eventBus.fireEvent(new UserMessageChangedEvent(page, this));
     }
 
     public void setVisibility(XVis visibility) {

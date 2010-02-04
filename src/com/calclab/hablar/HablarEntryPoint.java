@@ -7,6 +7,7 @@ import com.calclab.hablar.login.client.HablarLogin;
 import com.calclab.hablar.openchat.client.HablarOpenChat;
 import com.calclab.hablar.roster.client.HablarRoster;
 import com.calclab.hablar.search.client.HablarSearch;
+import com.calclab.hablar.signals.client.HablarSignals;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.RootPanel;
@@ -33,6 +34,10 @@ public class HablarEntryPoint implements EntryPoint {
 
 	if (config.hasSearch) {
 	    HablarSearch.install(widget);
+	}
+
+	if (config.hasSignals) {
+	    HablarSignals.install(widget);
 	}
 
 	if (config.inline == null) {

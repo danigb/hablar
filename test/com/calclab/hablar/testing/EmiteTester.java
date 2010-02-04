@@ -14,7 +14,7 @@ import com.calclab.emite.xep.search.client.SearchManager;
 import com.calclab.emite.xtesting.SessionTester;
 import com.calclab.hablar.chat.client.ChatManagerTester;
 import com.calclab.hablar.chat.client.PresenceManagerTester;
-import com.calclab.hablar.core.client.i18n.Msg;
+import com.calclab.hablar.core.client.i18n.HablarMessages;
 import com.calclab.hablar.core.client.mvp.DefaultEventBus;
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
 import com.calclab.hablar.roster.client.RosterTester;
@@ -47,7 +47,7 @@ public class EmiteTester {
 	new SucoCoreModule().onInstall(container);
 	Suco.install(new EmiteCoreModule(), new InstantMessagingModule());
 
-	install(container, Msg.class, mock(Msg.class));
+	install(container, HablarMessages.class, mock(HablarMessages.class));
 
 	eventBus = new DefaultEventBus();
 	install(container, HablarEventBus.class, eventBus);

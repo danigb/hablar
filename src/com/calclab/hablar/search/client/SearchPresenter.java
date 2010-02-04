@@ -1,5 +1,7 @@
 package com.calclab.hablar.search.client;
 
+import static com.calclab.hablar.core.client.i18n.Translator.i18n;
+
 import java.util.HashMap;
 import java.util.List;
 
@@ -8,7 +10,6 @@ import com.calclab.emite.im.client.chat.ChatManager;
 import com.calclab.emite.im.client.roster.Roster;
 import com.calclab.emite.xep.search.client.SearchManager;
 import com.calclab.emite.xep.search.client.SearchResultItem;
-import com.calclab.hablar.core.client.i18n.Msg;
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
 import com.calclab.hablar.core.client.page.PagePresenter;
 import com.calclab.hablar.core.client.ui.icon.HablarIcons;
@@ -31,7 +32,6 @@ public class SearchPresenter extends PagePresenter<SearchDisplay> {
 
     private final SearchManager manager;
     private final Roster roster;
-    private final Msg i18n;
 
     private PopupMenuView<SearchResultItemPresenter> addToRosterMenu;
     private PopupMenuView<SearchResultItemPresenter> removeFromRosterMenu;
@@ -40,9 +40,8 @@ public class SearchPresenter extends PagePresenter<SearchDisplay> {
 	super("HablarSearch", "" + (++index), eventBus, display);
 	manager = Suco.get(SearchManager.class);
 	roster = Suco.get(Roster.class);
-	i18n = Suco.get(Msg.class);
 
-	getState().init(HablarIcons.get(HablarIcons.IconType.search), i18n.searchUsers());
+	getState().init(HablarIcons.get(HablarIcons.IconType.search), i18n().searchUsers());
 	createMenus();
 	bind();
     }
@@ -65,14 +64,14 @@ public class SearchPresenter extends PagePresenter<SearchDisplay> {
 
     private void createMenus() {
 	addToRosterMenu = display.createMenu(ADD_ROSTER_MENU_DEB_ID);
-	addToRosterMenu
-		.addAction(new MenuAction<SearchResultItemPresenter>(i18n.addToContacts(), ADD_ROSTERITEM_DEB_ID) {
-		    @Override
-		    public void execute(final SearchResultItemPresenter target) {
-			onResultToRoster(target);
-		    }
-		});
-	addToRosterMenu.addAction(new MenuAction<SearchResultItemPresenter>(i18n.chat(), CHAT_DEB_ID) {
+	addToRosterMenu.addAction(new MenuAction<SearchResultItemPresenter>(i18n().addToContacts(),
+		ADD_ROSTERITEM_DEB_ID) {
+	    @Override
+	    public void execute(final SearchResultItemPresenter target) {
+		onResultToRoster(target);
+	    }
+	});
+	addToRosterMenu.addAction(new MenuAction<SearchResultItemPresenter>(i18n().chat(), CHAT_DEB_ID) {
 	    @Override
 	    public void execute(final SearchResultItemPresenter target) {
 		onChatWith(target);
@@ -111,7 +110,7 @@ public class SearchPresenter extends PagePresenter<SearchDisplay> {
 
 		@Override
 		public void onSuccess(final List<SearchResultItem> items) {
-		    display.showMessage(i18n.searchResultsFor(text, items.size()), Level.success);
+		    display.showMessage(i18n().searchResultsFor(text, items.size()), Level.success);
 		    for (final SearchResultItem item : items) {
 			SearchResultItemDisplay itemDisplay = display.newSearchResultItemDisplay();
 			new SearchResultItemPresenter(item, itemDisplay);

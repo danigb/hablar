@@ -1,9 +1,10 @@
 package com.calclab.hablar.editbuddy.client;
 
+import static com.calclab.hablar.core.client.i18n.Translator.i18n;
+
 import com.calclab.emite.im.client.roster.Roster;
 import com.calclab.emite.im.client.roster.RosterItem;
 import com.calclab.hablar.core.client.Hablar;
-import com.calclab.hablar.core.client.i18n.Msg;
 import com.calclab.hablar.core.client.page.PagePresenter;
 import com.calclab.hablar.core.client.pages.OverlayContainer;
 import com.calclab.hablar.core.client.ui.menu.MenuAction;
@@ -21,7 +22,6 @@ public class EditBuddyPresenter extends PagePresenter<EditBuddyDisplay> {
     private static int index = 0;
     protected static final String[] EMPTY_ARRAY = new String[0];
     private final Hablar hablar;
-    private final Msg i18n;
     private final MenuAction<RosterItem> action;
     private final Roster roster;
     private RosterItem currentItem;
@@ -29,10 +29,9 @@ public class EditBuddyPresenter extends PagePresenter<EditBuddyDisplay> {
     public EditBuddyPresenter(Hablar hablar, EditBuddyDisplay display) {
 	super("EditButty", "" + (++index), hablar.getEventBus(), display);
 	this.hablar = hablar;
-	i18n = Suco.get(Msg.class);
 	roster = Suco.get(Roster.class);
 
-	this.action = new MenuAction<RosterItem>(i18n.changeNickName(), "EditBuddy-editAction") {
+	this.action = new MenuAction<RosterItem>(i18n().changeNickName(), "EditBuddy-editAction") {
 	    @Override
 	    public void execute(RosterItem target) {
 		onChangeNickName(target);

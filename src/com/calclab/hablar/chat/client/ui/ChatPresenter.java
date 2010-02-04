@@ -1,5 +1,7 @@
 package com.calclab.hablar.chat.client.ui;
 
+import static com.calclab.hablar.core.client.i18n.Translator.i18n;
+
 import com.calclab.emite.core.client.xmpp.stanzas.Message;
 import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 import com.calclab.emite.core.client.xmpp.stanzas.Presence.Show;
@@ -7,7 +9,6 @@ import com.calclab.emite.im.client.chat.Chat;
 import com.calclab.emite.im.client.chat.Chat.State;
 import com.calclab.emite.im.client.roster.Roster;
 import com.calclab.emite.im.client.roster.RosterItem;
-import com.calclab.hablar.core.client.i18n.Msg;
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
 import com.calclab.hablar.core.client.page.PagePresenter;
 import com.calclab.hablar.core.client.ui.icon.HablarIcons;
@@ -30,7 +31,6 @@ public class ChatPresenter extends PagePresenter<ChatDisplay> {
     public ChatPresenter(HablarEventBus eventBus, final Chat chat, final ChatDisplay display) {
 	super(TYPE, createId(chat.getURI().toString()), eventBus, display);
 	display.setId(getId());
-	final Msg i18n = Suco.get(Msg.class);
 	final XmppURI fromURI = chat.getURI();
 	final String name = getName(fromURI);
 
@@ -42,7 +42,7 @@ public class ChatPresenter extends PagePresenter<ChatDisplay> {
 		final String body = ChatMessageFormatter.format(message.getBody());
 		if (body != null) {
 		    display.showMessage(name, body, ChatDisplay.MessageType.incoming);
-		    getState().setPageTitle(i18n.newChatFrom(name, ChatMessageFormatter.ellipsis(body, 25)));
+		    getState().setPageTitle(i18n().newChatFrom(name, ChatMessageFormatter.ellipsis(body, 25)));
 		}
 	    }
 	});

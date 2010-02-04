@@ -20,7 +20,7 @@ import com.google.gwt.i18n.client.LocalizableResource.GenerateKeys;
 // Line below defaults to I18N_default.xlf, I18N_de.xlf, etc
 // GenerateKeys defaults to MD5 hash of text and meaning
 @GenerateKeys
-public interface Msg extends Messages {
+public interface HablarMessages extends Messages {
 
     @DefaultMessage("Add to Contacts")
     String addToContacts();

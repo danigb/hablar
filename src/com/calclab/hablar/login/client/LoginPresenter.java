@@ -1,9 +1,10 @@
 package com.calclab.hablar.login.client;
 
+import static com.calclab.hablar.core.client.i18n.Translator.i18n;
+
 import com.calclab.emite.core.client.xmpp.session.Session;
 import com.calclab.emite.core.client.xmpp.session.Session.State;
 import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
-import com.calclab.hablar.core.client.i18n.Msg;
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
 import com.calclab.hablar.core.client.page.PagePresenter;
 import com.calclab.hablar.core.client.ui.icon.HablarIcons;
@@ -16,12 +17,10 @@ import com.google.gwt.event.dom.client.ClickHandler;
 public class LoginPresenter extends PagePresenter<LoginDisplay> {
     private static int index = 0;
     private final Session session;
-    private final Msg i18n;
 
     public LoginPresenter(HablarEventBus eventBus, LoginDisplay display) {
 	super("Login", "" + (++index), eventBus, display);
 	this.session = Suco.get(Session.class);
-	this.i18n = Suco.get(Msg.class);
 	getState().setPageIcon(HablarIcons.get(IconType.off));
 
 	display.getAction().addClickHandler(new ClickHandler() {
@@ -48,18 +47,18 @@ public class LoginPresenter extends PagePresenter<LoginDisplay> {
 	String actionText, pageTitle, pageIcon;
 	boolean actionEnabled;
 	if (state == State.ready) {
-	    actionText = i18n.logout();
+	    actionText = i18n().logout();
 	    actionEnabled = true;
 	    final String userName = session.getCurrentUser().getNode();
-	    pageTitle = i18n.connectedAs(userName);
+	    pageTitle = i18n().connectedAs(userName);
 	    pageIcon = HablarIcons.get(IconType.on);
 	} else if (state == State.disconnected) {
-	    actionText = i18n.login();
+	    actionText = i18n().login();
 	    actionEnabled = true;
-	    pageTitle = i18n.disconnected();
+	    pageTitle = i18n().disconnected();
 	    pageIcon = HablarIcons.get(IconType.off);
 	} else {
-	    pageTitle = actionText = i18n.waitDots();
+	    pageTitle = actionText = i18n().waitDots();
 	    actionEnabled = false;
 	    pageIcon = HablarIcons.get(IconType.off);
 	}

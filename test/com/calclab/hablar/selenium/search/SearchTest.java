@@ -39,7 +39,7 @@ public class SearchTest extends HablarSeleniumTest {
 	login.signInDefUser();
 	login.assertIsConnectedAs(SeleniumConstants.USERNODE);
 	roster.getHeader().click();
-	roster.getSearchIcon().click();
+	search.getAction().click();
 	// Only to test accordion
 	roster.getHeader().click();
 	search.getHeader().click();

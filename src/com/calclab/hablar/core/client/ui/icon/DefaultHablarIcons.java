@@ -46,16 +46,12 @@ public class DefaultHablarIcons extends HablarIcons {
 
     private static IconsUiBinder uiBinder = GWT.create(IconsUiBinder.class);
 
-    public static void init() {
-	HablarIcons.setStyles(new DefaultHablarIcons());
-    }
-
     @UiField
     StyleIcons icons;
     @UiField
     Styles style;
 
-    DefaultHablarIcons() {
+    public DefaultHablarIcons() {
 	uiBinder.createAndBindUi(this);
     }
 

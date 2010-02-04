@@ -1,10 +1,8 @@
 package com.calclab.hablar.selenium.search;
 
 import org.openqa.selenium.RenderedWebElement;
-import org.openqa.selenium.support.ByIdOrName;
 import org.openqa.selenium.support.FindBy;
 
-import com.calclab.hablar.basic.client.ui.utils.DebugId;
 import com.calclab.hablar.search.client.SearchResultItemWidget;
 import com.calclab.hablar.selenium.PageObject;
 
@@ -22,7 +20,11 @@ public class SearchPageObject extends PageObject {
     private RenderedWebElement searchButton;
 
     public RenderedWebElement ChatMenuItem() {
-	return findElement(new ByIdOrName(DebugId.getGwtId("")));
+	return null;
+    }
+
+    public RenderedWebElement getAction() {
+	return null;
     }
 
     public RenderedWebElement getHeader() {
@@ -54,7 +56,7 @@ public class SearchPageObject extends PageObject {
     }
 
     private RenderedWebElement findJid(final String prefix, final String jid) {
-	return findElement(new ByIdOrName(DebugId.getGwtId(DebugId.getFromJid(prefix, jid))));
+	return null;
     }
 
 }

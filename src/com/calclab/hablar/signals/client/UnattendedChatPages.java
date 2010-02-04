@@ -1,18 +1,15 @@
 package com.calclab.hablar.signals.client;
 
 import java.util.HashSet;
-import java.util.Set;
 
-import com.calclab.hablar.basic.client.ui.page.PageView;
-import com.calclab.hablar.basic.client.ui.page.PageView.Visibility;
-import com.calclab.hablar.basic.client.ui.page.events.UserMessageEvent;
-import com.calclab.hablar.basic.client.ui.page.events.UserMessageHandler;
-import com.calclab.hablar.basic.client.ui.pages.events.PageClosedEvent;
-import com.calclab.hablar.basic.client.ui.pages.events.PageClosedHandler;
-import com.calclab.hablar.basic.client.ui.pages.events.PageOpenedEvent;
-import com.calclab.hablar.basic.client.ui.pages.events.PageOpenedHandler;
 import com.calclab.hablar.chat.client.ui.ChatPresenter;
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
+import com.calclab.hablar.core.client.page.Page;
+import com.calclab.hablar.core.client.page.UserMessageChangedEvent;
+import com.calclab.hablar.core.client.page.UserMessageChangedHandler;
+import com.calclab.hablar.core.client.page.VisibilityChangedEvent;
+import com.calclab.hablar.core.client.page.VisibilityChangedHandler;
+import com.calclab.hablar.core.client.page.PagePresenter.XVis;
 
 /**
  * A registry of unattended chat pages. It listen to events and tracks which
@@ -20,13 +17,13 @@ import com.calclab.hablar.core.client.mvp.HablarEventBus;
  * 
  */
 public class UnattendedChatPages {
-    private final Set<PageView> unattendedChatPages;
 
-    private final HablarEventBus hablarEventBus;
+    private final HablarEventBus eventBus;
+    private final HashSet<Page<?>> unattendedChatPages;
 
     public UnattendedChatPages(HablarEventBus hablarEventBus) {
-	this.hablarEventBus = hablarEventBus;
-	unattendedChatPages = new HashSet<PageView>();
+	this.eventBus = hablarEventBus;
+	unattendedChatPages = new HashSet<Page<?>>();
 	bind();
     }
 
@@ -34,57 +31,54 @@ public class UnattendedChatPages {
 	return unattendedChatPages.size();
     }
 
-    public void onChatClosed(final PageView chatPage) {
+    public void onChatClosed(final Page<?> chatPage) {
 	if (unattendedChatPages.remove(chatPage)) {
-	    hablarEventBus.fireEvent(new UnattendedChatsChangedEvent(this));
 	}
     }
 
-    public void onChatOpened(final PageView chatPage) {
-	if (chatPage.getVisibility() == Visibility.focused && unattendedChatPages.remove(chatPage)) {
-	    hablarEventBus.fireEvent(new UnattendedChatsChangedEvent(this));
-	}
-    }
-
-    public void onNewMsg(final PageView chatPage) {
-	if (chatPage.getVisibility() != Visibility.focused && unattendedChatPages.add(chatPage)) {
-	    hablarEventBus.fireEvent(new UnattendedChatsChangedEvent(this));
+    public void onNewMsg(final Page<?> chatPage) {
+	XVis visibility = chatPage.getState().getVisibility();
+	if (visibility != XVis.open && unattendedChatPages.add(chatPage)) {
+	    eventBus.fireEvent(new UnattendedChatsChangedEvent(this));
 	}
     }
 
     private void bind() {
-	hablarEventBus.addHandler(UserMessageEvent.TYPE, new UserMessageHandler() {
+	eventBus.addHandler(UserMessageChangedEvent.TYPE, new UserMessageChangedHandler() {
+
 	    @Override
-	    public void onUserMessage(UserMessageEvent event) {
-		PageView page = event.getPage().getView();
+	    public void onUserMessageChanged(UserMessageChangedEvent event) {
+		Page<?> page = event.getPage();
 		if (isChatPage(page)) {
 		    onNewMsg(page);
 		}
 	    }
 	});
 
-	hablarEventBus.addHandler(PageClosedEvent.TYPE, new PageClosedHandler() {
+	eventBus.addHandler(VisibilityChangedEvent.TYPE, new VisibilityChangedHandler() {
 	    @Override
-	    public void onPageClosed(PageView page) {
+	    public void onVisibilityChanged(VisibilityChangedEvent event) {
+		Page<?> page = event.getPage();
 		if (isChatPage(page)) {
-		    onChatClosed(page);
+		    onChatVisibilityChanged(page);
 		}
 	    }
-	});
 
-	hablarEventBus.addHandler(PageOpenedEvent.TYPE, new PageOpenedHandler() {
-	    @Override
-	    public void onPageOpened(PageView page) {
-		if (isChatPage(page)) {
-		    onChatOpened(page);
-		}
-	    }
 	});
 
     }
 
-    private boolean isChatPage(final PageView page) {
+    private boolean isChatPage(final Page<?> page) {
 	return page.getPageType() == ChatPresenter.TYPE;
+    }
+
+    private void onChatVisibilityChanged(Page<?> page) {
+	XVis visibility = page.getState().getVisibility();
+	if (visibility == XVis.open && unattendedChatPages.remove(page)) {
+	    eventBus.fireEvent(new UnattendedChatsChangedEvent(this));
+	} else if (unattendedChatPages.remove(page)) {
+	    eventBus.fireEvent(new UnattendedChatsChangedEvent(this));
+	}
     }
 
 }

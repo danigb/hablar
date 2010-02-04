@@ -1,5 +1,7 @@
 package com.calclab.hablar.roster.client;
 
+import static com.calclab.hablar.core.client.i18n.Translator.i18n;
+
 import java.util.Collection;
 import java.util.HashMap;
 
@@ -9,7 +11,6 @@ import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 import com.calclab.emite.im.client.chat.ChatManager;
 import com.calclab.emite.im.client.roster.Roster;
 import com.calclab.emite.im.client.roster.RosterItem;
-import com.calclab.hablar.core.client.i18n.Msg;
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
 import com.calclab.hablar.core.client.page.PagePresenter;
 import com.calclab.hablar.core.client.ui.icon.HablarIcons;
@@ -26,7 +27,6 @@ public class RosterPresenter extends PagePresenter<RosterDisplay> {
     private static int index = 0;
     public static final String TYPE = "Roster";
     private boolean active;
-    private final Msg i18n;
     private final Roster roster;
     private final HashMap<XmppURI, RosterItemPresenter> items;
     private final ChatManager manager;
@@ -34,13 +34,12 @@ public class RosterPresenter extends PagePresenter<RosterDisplay> {
 
     public RosterPresenter(HablarEventBus eventBus, RosterDisplay display) {
 	super(TYPE, "" + (++index), eventBus, display);
-	i18n = Suco.get(Msg.class);
 	manager = Suco.get(ChatManager.class);
 	roster = Suco.get(Roster.class);
 	items = new HashMap<XmppURI, RosterItemPresenter>();
 	active = true;
 
-	getState().init(HablarIcons.get(IconType.roster), i18n.contacts());
+	getState().init(HablarIcons.get(IconType.roster), i18n().contacts());
 
 	addRosterListeners();
 	addSessionListeners();

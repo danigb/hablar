@@ -15,7 +15,7 @@ public abstract class HablarSeleniumTest extends HablarSeleniumDefaults {
 
     protected void openChat(String jid) {
 	roster.getHeader().click();
-	roster.OpenChatIcon().click();
+	openChat.getAction().click();
 	openChat.getJabberId().sendKeys(jid);
 	openChat.getOpen().click();
     }
