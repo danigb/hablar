@@ -1,5 +1,7 @@
-package com.calclab.hablar.core.client.page;
+package com.calclab.hablar.core.client.page.events;
 
+import com.calclab.hablar.core.client.page.Page;
+import com.calclab.hablar.core.client.page.PageState;
 import com.google.gwt.event.shared.GwtEvent;
 
 public class UserMessageChangedEvent extends GwtEvent<UserMessageChangedHandler> {

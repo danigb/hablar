@@ -42,7 +42,7 @@ public class ChatPresenter extends PagePresenter<ChatDisplay> {
 		final String body = ChatMessageFormatter.format(message.getBody());
 		if (body != null) {
 		    display.showMessage(name, body, ChatDisplay.MessageType.incoming);
-		    getState().setPageTitle(i18n().newChatFrom(name, ChatMessageFormatter.ellipsis(body, 25)));
+		    getState().setUserMessage(i18n().newChatFrom(name, ChatMessageFormatter.ellipsis(body, 25)));
 		}
 	    }
 	});

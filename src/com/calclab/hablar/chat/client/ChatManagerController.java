@@ -13,7 +13,7 @@ import com.calclab.hablar.chat.client.ui.ChatDisplay;
 import com.calclab.hablar.chat.client.ui.ChatPresenter;
 import com.calclab.hablar.chat.client.ui.ChatWidget;
 import com.calclab.hablar.core.client.Hablar;
-import com.calclab.hablar.core.client.page.PagePresenter.XVis;
+import com.calclab.hablar.core.client.page.PagePresenter.Visibility;
 import com.calclab.suco.client.Suco;
 import com.calclab.suco.client.events.Listener;
 
@@ -29,10 +29,10 @@ public class ChatManagerController {
     private final ChatPageFactory factory;
     private final boolean sendButtonVisible;
 
-    private final Hablar hablar;
+    private final Hablar hablarPresenter;
 
-    public ChatManagerController(Hablar hablar, ChatConfig config) {
-	this(hablar, config, new ChatPageFactory() {
+    public ChatManagerController(Hablar hablarPresenter, ChatConfig config) {
+	this(hablarPresenter, config, new ChatPageFactory() {
 	    @Override
 	    public ChatDisplay create(boolean sendButtonVisible) {
 		return new ChatWidget(sendButtonVisible);
@@ -40,8 +40,8 @@ public class ChatManagerController {
 	});
     }
 
-    public ChatManagerController(Hablar hablar, ChatConfig config, ChatPageFactory factory) {
-	this.hablar = hablar;
+    public ChatManagerController(Hablar hablarPresenter, ChatConfig config, ChatPageFactory factory) {
+	this.hablarPresenter = hablarPresenter;
 	this.factory = factory;
 	this.chatPages = new HashMap<XmppURI, ChatPresenter>();
 
@@ -55,7 +55,7 @@ public class ChatManagerController {
 	chatManager.onChatCreated(new Listener<Chat>() {
 	    @Override
 	    public void onEvent(Chat chat) {
-		createChat(chat, XVis.closed);
+		createChat(chat, Visibility.notFocused);
 	    }
 	});
 
@@ -84,11 +84,11 @@ public class ChatManagerController {
 
     }
 
-    private void createChat(Chat chat, XVis visibility) {
+    private void createChat(Chat chat, Visibility visibility) {
 	ChatDisplay display = factory.create(sendButtonVisible);
-	ChatPresenter presenter = new ChatPresenter(hablar.getEventBus(), chat, display);
+	ChatPresenter presenter = new ChatPresenter(hablarPresenter.getEventBus(), chat, display);
 	chatPages.put(chat.getURI(), presenter);
-	hablar.addPage(presenter);
+	hablarPresenter.addPage(presenter);
 
 	RosterItem item = roster.getItemByJID(chat.getURI().getJID());
 	Show show = item != null ? item.getShow() : Show.unknown;

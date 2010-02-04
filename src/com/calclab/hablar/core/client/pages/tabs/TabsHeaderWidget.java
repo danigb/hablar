@@ -1,4 +1,4 @@
-package com.calclab.hablar.core.client.pages.accordion;
+package com.calclab.hablar.core.client.pages.tabs;
 
 import com.calclab.hablar.core.client.pages.HeaderDisplay;
 import com.google.gwt.core.client.GWT;
@@ -6,27 +6,26 @@ import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.HasText;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 
-public class AccordionHeaderWidget extends Composite implements HeaderDisplay {
+public class TabsHeaderWidget extends Composite implements HeaderDisplay {
 
-    interface AccordionHeaderWidgetUiBinder extends UiBinder<Widget, AccordionHeaderWidget> {
+    interface TabsHeaderWidgetUiBinder extends UiBinder<Widget, TabsHeaderWidget> {
     }
 
-    private static AccordionHeaderWidgetUiBinder uiBinder = GWT.create(AccordionHeaderWidgetUiBinder.class);
+    private static TabsHeaderWidgetUiBinder uiBinder = GWT.create(TabsHeaderWidgetUiBinder.class);
 
     @UiField
-    FlowPanel self;
-
+    HTMLPanel self;
     @UiField
     Label title, icon, close;
 
-    public AccordionHeaderWidget(String pageId) {
+    public TabsHeaderWidget(String id) {
 	initWidget(uiBinder.createAndBindUi(this));
-	ensureDebugId("HeaderWidget-" + pageId);
+	ensureDebugId("HeaderWidget-" + id);
     }
 
     @Override

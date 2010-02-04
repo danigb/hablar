@@ -6,8 +6,7 @@
 			gwt-image: 'closeIcon';
 		}
 	</ui:style>
-	<ui:image field='closeIcon' src='close.png' />
-
+	<ui:image field='closeIcon' src='../close.png' />
 
 	<g:FlowPanel styleName='hablar-AccordionHeaderWidget hablar-Header'
 		ui:field="self">

@@ -13,8 +13,8 @@ public class HablarSignals implements EntryPoint {
 	install(widget.getHablar());
     }
 
-    private static void install(Hablar hablar) {
-	HablarEventBus eventBus = hablar.getEventBus();
+    private static void install(Hablar hablarPresenter) {
+	HablarEventBus eventBus = hablarPresenter.getEventBus();
 	HasText titleDisplay = new HasText() {
 	    @Override
 	    public String getText() {

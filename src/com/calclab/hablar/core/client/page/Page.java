@@ -2,7 +2,7 @@ package com.calclab.hablar.core.client.page;
 
 import com.calclab.hablar.core.client.mvp.Display;
 import com.calclab.hablar.core.client.mvp.Presenter;
-import com.calclab.hablar.core.client.page.PagePresenter.XVis;
+import com.calclab.hablar.core.client.page.PagePresenter.Visibility;
 
 /**
  * All page presenters must implements this interface
@@ -23,6 +23,6 @@ public interface Page<T extends Display> extends Presenter<T> {
 
     public void requestOpen();
 
-    public void setVisibility(XVis closed);
+    public void setVisibility(Visibility closed);
 
 }

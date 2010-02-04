@@ -2,10 +2,12 @@ package com.calclab.hablar.core.client.page;
 
 import com.calclab.hablar.core.client.mvp.Display;
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
+import com.calclab.hablar.core.client.page.events.FocusPageRequestEvent;
+import com.calclab.hablar.core.client.page.events.HidePageRequestEvent;
 
 public class PagePresenter<T extends Display> implements Page<T> {
-    public static enum XVis {
-	open, closed, hidden
+    public static enum Visibility {
+	focused, notFocused, hidden
     }
     protected final T display;
     protected final HablarEventBus eventBus;
@@ -42,15 +44,15 @@ public class PagePresenter<T extends Display> implements Page<T> {
 
     @Override
     public void requestHide() {
-	eventBus.fireEvent(new ClosePageRequestEvent(this));
+	eventBus.fireEvent(new HidePageRequestEvent(this));
     }
 
     public void requestOpen() {
-	eventBus.fireEvent(new OpenPageRequestEvent(this));
+	eventBus.fireEvent(new FocusPageRequestEvent(this));
     }
 
     @Override
-    public void setVisibility(XVis visibility) {
+    public void setVisibility(Visibility visibility) {
 	state.setVisibility(visibility);
     }
 

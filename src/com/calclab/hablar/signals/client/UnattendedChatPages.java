@@ -5,11 +5,11 @@ import java.util.HashSet;
 import com.calclab.hablar.chat.client.ui.ChatPresenter;
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
 import com.calclab.hablar.core.client.page.Page;
-import com.calclab.hablar.core.client.page.UserMessageChangedEvent;
-import com.calclab.hablar.core.client.page.UserMessageChangedHandler;
-import com.calclab.hablar.core.client.page.VisibilityChangedEvent;
-import com.calclab.hablar.core.client.page.VisibilityChangedHandler;
-import com.calclab.hablar.core.client.page.PagePresenter.XVis;
+import com.calclab.hablar.core.client.page.PagePresenter.Visibility;
+import com.calclab.hablar.core.client.page.events.UserMessageChangedEvent;
+import com.calclab.hablar.core.client.page.events.UserMessageChangedHandler;
+import com.calclab.hablar.core.client.page.events.VisibilityChangedEvent;
+import com.calclab.hablar.core.client.page.events.VisibilityChangedHandler;
 
 /**
  * A registry of unattended chat pages. It listen to events and tracks which
@@ -37,8 +37,8 @@ public class UnattendedChatPages {
     }
 
     public void onNewMsg(final Page<?> chatPage) {
-	XVis visibility = chatPage.getState().getVisibility();
-	if (visibility != XVis.open && unattendedChatPages.add(chatPage)) {
+	Visibility visibility = chatPage.getState().getVisibility();
+	if (visibility != Visibility.focused && unattendedChatPages.add(chatPage)) {
 	    eventBus.fireEvent(new UnattendedChatsChangedEvent(this));
 	}
     }
@@ -73,8 +73,8 @@ public class UnattendedChatPages {
     }
 
     private void onChatVisibilityChanged(Page<?> page) {
-	XVis visibility = page.getState().getVisibility();
-	if (visibility == XVis.open && unattendedChatPages.remove(page)) {
+	Visibility visibility = page.getState().getVisibility();
+	if (visibility == Visibility.focused && unattendedChatPages.remove(page)) {
 	    eventBus.fireEvent(new UnattendedChatsChangedEvent(this));
 	} else if (unattendedChatPages.remove(page)) {
 	    eventBus.fireEvent(new UnattendedChatsChangedEvent(this));

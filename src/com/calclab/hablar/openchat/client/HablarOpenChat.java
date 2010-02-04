@@ -16,11 +16,22 @@ import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 
+/**
+ * Adds the ability to open a chat with any jabber id.<br/>
+ * This module adds:<br/>
+ * 1. A button in the roster<br/>
+ * 2. A overlay panel to write the jabber id
+ * 
+ */
 public class HablarOpenChat implements EntryPoint {
 
     public static void install(final HablarWidget widget) {
-	final Hablar hablar = widget.getHablar();
-	final OpenChatPresenter openChat = new OpenChatPresenter(hablar, new OpenChatWidget());
+	install(widget.getHablar());
+    }
+
+    private static void install(final Hablar hablar) {
+	final OpenChatPresenter openChat = new OpenChatPresenter(hablar.getEventBus(), new OpenChatWidget());
+	hablar.addPage(openChat, OverlayContainer.TYPE);
 
 	String iconStyle = HablarIcons.get(IconType.chatAdd);
 	List<PagePresenter<?>> rosters = hablar.getPagePresentersOfType(RosterPresenter.TYPE);
@@ -28,7 +39,7 @@ public class HablarOpenChat implements EntryPoint {
 	    ((RosterPresenter) roster).addAction(iconStyle, "HablarOpenChat-openAction", new ClickHandler() {
 		@Override
 		public void onClick(ClickEvent event) {
-		    hablar.addPage(openChat, OverlayContainer.TYPE);
+		    openChat.requestOpen();
 		}
 	    });
 	}

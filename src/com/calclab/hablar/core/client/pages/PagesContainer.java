@@ -7,11 +7,13 @@ public interface PagesContainer {
 
     boolean add(Page<?> page);
 
-    String getType();
+    String getRol();
 
     Widget getWidget();
 
-    boolean open(Page<?> page);
+    boolean hide(Page<?> page);
+
+    boolean focus(Page<?> page);
 
     boolean remove(Page<?> page);
 }

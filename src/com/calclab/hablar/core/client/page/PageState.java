@@ -1,19 +1,22 @@
 package com.calclab.hablar.core.client.page;
 
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
-import com.calclab.hablar.core.client.page.PagePresenter.XVis;
+import com.calclab.hablar.core.client.page.PagePresenter.Visibility;
+import com.calclab.hablar.core.client.page.events.UserMessageChangedEvent;
+import com.calclab.hablar.core.client.page.events.VisibilityChangedEvent;
+import com.calclab.hablar.core.client.page.events.VisibilityChangedHandler;
 
 public class PageState {
     private String pageTitle, userMessage, pageIcon;
     private boolean closeable;
-    private XVis visibility;
+    private Visibility visibility;
     private final HablarEventBus eventBus;
     private final Page<?> page;
 
     public PageState(HablarEventBus eventBus, Page<?> page) {
 	this.eventBus = eventBus;
 	this.page = page;
-	visibility = XVis.hidden;
+	visibility = Visibility.hidden;
 	closeable = false;
     }
 
@@ -55,7 +58,7 @@ public class PageState {
 	return userMessage;
     }
 
-    public XVis getVisibility() {
+    public Visibility getVisibility() {
 	return visibility;
     }
 
@@ -90,7 +93,7 @@ public class PageState {
 	eventBus.fireEvent(new UserMessageChangedEvent(page, this));
     }
 
-    public void setVisibility(XVis visibility) {
+    public void setVisibility(Visibility visibility) {
 	this.visibility = visibility;
 	eventBus.fireEvent(new VisibilityChangedEvent(page, this));
     }

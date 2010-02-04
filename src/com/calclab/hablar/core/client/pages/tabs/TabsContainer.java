@@ -1,31 +1,34 @@
-package com.calclab.hablar.core.client.pages.accordion;
+package com.calclab.hablar.core.client.pages.tabs;
+
+import static com.google.gwt.dom.client.Style.Unit.PX;
 
 import com.calclab.hablar.core.client.page.Page;
 import com.calclab.hablar.core.client.pages.HeaderDisplay;
 import com.calclab.hablar.core.client.pages.MainContainer;
 import com.google.gwt.user.client.ui.LayoutPanel;
+import com.google.gwt.user.client.ui.TabLayoutPanel;
 import com.google.gwt.user.client.ui.Widget;
 
-public class AccordionContainer extends MainContainer {
+public class TabsContainer extends MainContainer {
     private static final double SIZE_HEADER = 24;
 
-    public AccordionContainer(LayoutPanel container) {
-	super(new AccordionPanel(), container);
+    public TabsContainer(LayoutPanel container) {
+	super(new TabLayoutPanel(SIZE_HEADER, PX), container);
     }
 
     @Override
     protected void add(Widget container, Widget pageWidget, Widget headerWidget) {
-	((AccordionPanel) container).add(pageWidget, headerWidget, SIZE_HEADER);
+	((TabLayoutPanel) container).add(pageWidget, headerWidget);
     }
 
     @Override
     protected HeaderDisplay createHeaderDisplay(Page<?> page) {
-	return new AccordionHeaderWidget(page.getId());
+	return new TabsHeaderWidget(page.getId());
     }
 
     @Override
     protected void focus(Widget container, Widget pageWidget) {
-	((AccordionPanel) container).showWidget(pageWidget);
+	((TabLayoutPanel) container).selectTab(pageWidget);
     }
 
 }

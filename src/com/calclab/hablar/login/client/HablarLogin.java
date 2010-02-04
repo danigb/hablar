@@ -16,9 +16,9 @@ public class HablarLogin implements EntryPoint {
 	createLoginPage(widget.getHablar(), config, Suco.get(Session.class));
     }
 
-    private static void createLoginPage(Hablar hablar, LoginConfig config, Session session) {
-	final LoginPresenter login = new LoginPresenter(hablar.getEventBus(), new LoginWidget());
-	hablar.addPage(login);
+    private static void createLoginPage(Hablar hablarPresenter, LoginConfig config, Session session) {
+	final LoginPresenter login = new LoginPresenter(hablarPresenter.getEventBus(), new LoginWidget());
+	hablarPresenter.addPage(login);
 	session.onStateChanged(new Listener<Session>() {
 	    @Override
 	    public void onEvent(Session session) {

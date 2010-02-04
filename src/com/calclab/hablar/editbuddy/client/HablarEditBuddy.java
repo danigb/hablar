@@ -10,19 +10,22 @@ import com.calclab.hablar.editbuddy.client.ui.EditBuddyWidget;
 import com.calclab.hablar.roster.client.RosterPresenter;
 import com.google.gwt.core.client.EntryPoint;
 
+/**
+ * Adds the ability to edit a buddy in the roster
+ */
 public class HablarEditBuddy implements EntryPoint {
 
-    public static void install(HablarWidget widget) {
-	EditBuddyPresenter logic = new EditBuddyPresenter(widget.getHablar(), new EditBuddyWidget());
-	install(logic, widget.getHablar());
-    }
-
-    private static void install(EditBuddyPresenter logic, Hablar hablar) {
+    public static void install(Hablar hablar) {
+	EditBuddyPresenter presenter = new EditBuddyPresenter(hablar.getEventBus(), new EditBuddyWidget());
 	List<PagePresenter<?>> rosters = hablar.getPagePresentersOfType(RosterPresenter.TYPE);
 	for (Page<?> page : rosters) {
 	    RosterPresenter roster = (RosterPresenter) page;
-	    roster.getItemMenu().addAction(logic.getAction());
+	    roster.getItemMenu().addAction(presenter.getAction());
 	}
+    }
+
+    public static void install(HablarWidget widget) {
+	install(widget.getHablar());
     }
 
     @Override

@@ -4,16 +4,16 @@ import com.calclab.hablar.core.client.mvp.Presenter;
 import com.calclab.hablar.core.client.page.PageInfoChangedEvent;
 import com.calclab.hablar.core.client.page.PageInfoChangedHandler;
 import com.calclab.hablar.core.client.page.PageState;
-import com.calclab.hablar.core.client.page.VisibilityChangedEvent;
-import com.calclab.hablar.core.client.page.VisibilityChangedHandler;
-import com.calclab.hablar.core.client.page.PagePresenter.XVis;
+import com.calclab.hablar.core.client.page.PagePresenter.Visibility;
+import com.calclab.hablar.core.client.page.events.VisibilityChangedEvent;
+import com.calclab.hablar.core.client.page.events.VisibilityChangedHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 
 public class HeaderPresenter implements Presenter<HeaderDisplay> {
 
     private final HeaderDisplay display;
-    private String currentStyle;
+    private String currentStyle, currentIconStyle;
 
     public HeaderPresenter(final PageState state, final HeaderDisplay display) {
 	this.display = display;
@@ -36,7 +36,7 @@ public class HeaderPresenter implements Presenter<HeaderDisplay> {
 	state.addVisibilityChangedHandler(new VisibilityChangedHandler() {
 	    @Override
 	    public void onVisibilityChanged(VisibilityChangedEvent event) {
-		XVis visibility = state.getVisibility();
+		Visibility visibility = state.getVisibility();
 		visibilityChanged(visibility);
 	    }
 
@@ -46,12 +46,12 @@ public class HeaderPresenter implements Presenter<HeaderDisplay> {
 	state.addInfoChangedHandler(new PageInfoChangedHandler() {
 	    @Override
 	    public void onPageInfoChanged(PageInfoChangedEvent event) {
-		display.setIconStyle(state.getPageIcon());
+		setIconStyle(state.getPageIcon());
 		display.getHeaderTitle().setText(state.getPageTitle());
 	    }
 	});
 
-	display.setIconStyle(state.getPageIcon());
+	setIconStyle(state.getPageIcon());
 	display.getHeaderTitle().setText(state.getPageTitle());
 	display.setCloseIconVisible(state.isCloseable());
     }
@@ -60,11 +60,19 @@ public class HeaderPresenter implements Presenter<HeaderDisplay> {
 	return display;
     }
 
-    private void visibilityChanged(XVis visibility) {
+    private void setIconStyle(String pageIcon) {
+	if (currentIconStyle != null) {
+	    display.removeIconStyle(currentIconStyle);
+	}
+	currentIconStyle = pageIcon;
+	display.addIconStyle(currentIconStyle);
+    }
+
+    private void visibilityChanged(Visibility visibility) {
 	if (currentStyle != null)
 	    display.removeStyle(currentStyle);
 	String newStyle = visibility.toString();
-	display.setStyle(newStyle);
+	display.addStyle(newStyle);
 	currentStyle = newStyle;
     }
 
